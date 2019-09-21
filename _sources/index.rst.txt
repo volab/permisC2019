@@ -2,11 +2,11 @@
    sphinx-quickstart on Sun Sep 15 00:07:13 2019.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
+   
+Bienvenue  dans la documlentation du projet Permis C 2019
+============================================================
 
-Welcome to PermisC_2019's documentation!
-========================================
-
-Infos générales Projet permis C 2019
+Infos générales sur le projet
 ======================================
 
    :Auteur:            `VoLAB <https://github.com/volab>`_
@@ -22,7 +22,7 @@ Infos générales Projet permis C 2019
    :maxdepth: 2
    :caption: Contents:
    
-   readme
+   projectDoc
 
 
 
