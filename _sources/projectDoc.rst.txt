@@ -55,6 +55,13 @@ Les cartes électroniques
 
 .. _`Carte capteurs infrarouge` : https://easyeda.com/VoLab-Team/eduRobotCarte2
 
+.. figure:: images/cartePrincipale.jpg
+   :width: 400 px
+   :figwidth: 100%
+   :align: center
+   
+   Fichier Gerber carte principale
+
 Liste des composants
 ===========================
 
@@ -103,6 +110,19 @@ Attention au sens des fils comme sur la photo ci-dessous
    
 et souder 15cm de fil noir et rouge sur les moteurs (le fil rouge à doite)
 
+.. figure:: images/moteur.jpg
+   :width: 300 px
+   :figwidth: 100%
+   :align: center
+   
+   Fils souder sur le moteur
+   
+Penser à étamer l'autre extrêmité de chaque fil cela facilitera l'insertion dans les connecteur à
+vis de la carte L9110.
+
+Attention cette opération est délicate et les broches métalique de ces petits moteurs bon marcher 
+sont fragile. Si vous ne le sentez pas poussez la porte d'un fablab près de chez vous,
+il y aura certainement une bonne âme pour vous aider.
 
 
 Montage mécanique
@@ -119,8 +139,25 @@ Liste des outils nécessaires
 Les éatpes du montage
 +++++++++++++++++++++++
 
-#. montage des moteur
+#. monter les 4 colonnettes nylon sur le châssis
+#. montage des moteurs (ne pas mettre les roues tout de suite)
+#. monter les 3 blocs de piles
+#. monter la carte capteur infrarouge à l'arrière avec sa chargnière (opération un peu délicate)
+#. monter le bal caster en dessous (la bille)
+#. monter la carte électronique principale
+#. connecter les 3 boîtiers de piles à la carte principale
+#. relier la carte capteurs infrarouge à la carte principale
+#. insérer la carte ARDUINO dans son emplacement
+#. Oui vous pouvez mettre les roues !
 
+
+
+.. figure:: images/charniereArriere.jpg
+   :width: 500 px
+   :figwidth: 100%
+   :align: center
+   
+   Détail charnière arrière
 
 Programmer son robot
 =========================
