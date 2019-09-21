@@ -63,15 +63,30 @@ Liste des composants
 Souder les composants sur les cartes
 ======================================
 On commencera par les composants les moins hauts (comme les résistances) pour terminer 
-avec les composants les plus comme les capteurs ultrasons
+avec les composants les plus hauts comme les capteurs ultrasons
 
 Attention le buzzer à un sens de montage qui ne figure pas sur la sérigraphie de la carte (un oubli)
 
 Idem pour les connecteurs des piles.
 
+.. figure:: images/buzerEtConnecteurPiles.jpg
+   :width: 500 px
+   :figwidth: 100%
+   :alt: embase XH de pile carte
+   :align: center
+   
+   Sens des embase XH de piles
 
 Préparer les connecteurs des blocs de piles (qui sont livrés sans connecteur) et souder 15cm 
 de fil noir et rouge sur les moteurs (le fil rouge à doite)
+
+.. figure:: images/pinceEtBlocPile.jpg
+   :width: 500 px
+   :figwidth: 100%
+   :alt: pince et connecteur XH de pile
+   :align: center
+   
+   Pince et bloc de piles
 
 Montage mécanique
 ===================
