@@ -158,6 +158,13 @@ Les éatpes du montage
    :align: center
    
    Détail charnière arrière
+   
+.. figure:: images/detailEquerre.jpg
+   :width: 200 px
+   :figwidth: 100%
+   :align: center
+   
+   Détail de la petite équerre.   
 
 Programmer son robot
 =========================
