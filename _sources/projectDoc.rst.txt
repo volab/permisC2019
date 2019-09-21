@@ -67,26 +67,43 @@ avec les composants les plus hauts comme les capteurs ultrasons
 
 Attention le buzzer à un sens de montage qui ne figure pas sur la sérigraphie de la carte (un oubli)
 
+.. figure:: images/sensBuzerDetail.png
+   :width: 200 px
+   :figwidth: 100%
+   :align: center
+   
+   Sens de montage du buzer (tourné vers l'arrière)
+
 Idem pour les connecteurs des piles.
 
 .. figure:: images/buzerEtConnecteurPiles.jpg
    :width: 500 px
    :figwidth: 100%
-   :alt: embase XH de pile carte
    :align: center
    
    Sens des embase XH de piles
 
-Préparer les connecteurs des blocs de piles (qui sont livrés sans connecteur) et souder 15cm 
-de fil noir et rouge sur les moteurs (le fil rouge à doite)
+Préparer les connecteurs des blocs de piles (qui sont livrés sans connecteur).
+
+Attention au sens des fils comme sur la photo ci-dessous
 
 .. figure:: images/pinceEtBlocPile.jpg
    :width: 500 px
    :figwidth: 100%
-   :alt: pince et connecteur XH de pile
    :align: center
    
    Pince et bloc de piles
+   
+.. figure:: images/detailConnecteur pile.jpg
+   :width: 200 px
+   :figwidth: 100%
+   :align: center
+   
+   Détail connecteur pile   
+   
+et souder 15cm de fil noir et rouge sur les moteurs (le fil rouge à doite)
+
+
 
 Montage mécanique
 ===================
