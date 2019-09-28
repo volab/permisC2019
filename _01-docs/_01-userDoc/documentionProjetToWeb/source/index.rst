@@ -3,8 +3,6 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
    
-Bienvenue  dans la documlentation du projet Permis C 2019
-============================================================
 
 Infos générales sur le projet Permis C 2019
 ==============================================
@@ -12,7 +10,8 @@ Infos générales sur le projet Permis C 2019
    :Auteur:            `VoLAB <http://www.vorobotics.com/wp/>`_
    :Projet:             Permis C 2019
    :dépôt_GitHub:       https://github.com/volab/permisC2019.git
-   :documentation:      https://volab.github.io/permisC2019/ 
+   :documentation:      https://volab.github.io/permisC2019/
+   :page_wiki:          http://www.vorobotics.com/wiki/index.php?title=Nos_Projets#Robots
    :Licence:            CC BY-NC-SA 4.0
    :Liens:              https://creativecommons.org/licenses/by-nc-sa/4.0/ 
 
@@ -207,11 +206,33 @@ Les étapes du montage
 Attention les fils rouges des moteurs doivent être connecté en partant du centre de la L9110.
 Attention également à bien connecter le moteur de droite à droite !   
 
+.. |clearer|  raw:: html
+
+    <div class="clearer"></div>
+
 Programmer son robot
 =========================
-La programmation du robot se fait grâce à MBlock de chez `MakeBlock`_ link_desc
+.. image:: images/logo_mblock5.jpg
+   :scale: 20 %
+   :align: right
+   :target: https://www.makeblock.com/
+
+La programmation du robot se fait grâce à MBlock de chez `MakeBlock`_
 
 .. _`MakeBlock` : https://www.makeblock.com/
+
+Et pour vous aider, Professeur Gilles ;-) nous a rédigé de jolies `fiches pédagogiques`_
+
+.. _`fiches pédagogiques` :  https://github.com/volab/permisC2019/tree/master/_01-docs/_01-userDoc/fiches_peda_pcb_sansvariable/doc_peda_pcb_sansvariable_pdf
+
+.. container::
+
+    .. image:: images/capteur_ir.JPG
+       :width: 100 %
+       :scale: 70 %
+       :align: left
+       
+|clearer|
 
 Pour aller plus loin
 ======================
