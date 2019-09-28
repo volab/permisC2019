@@ -40,11 +40,14 @@ Assembler son Robot
 
 Voici les grandes étapes pour fabriquer notre robot.
 
-#. Commander les 2 cartes électronique sur le site easyEda.com
+#. Commander les 2 cartes électronique sur le site `EasyEda.com`_  (tips commandez les cartes
+nues chez le partenaire d'EasyEDA à soir Jlpcb qui est en liens directes depuis le site de EasyEDA)
 
 #. commander les composants
 
 #. souder les composants sur la carte principale et sur la carte capteur infrarouge
+
+.. _`EasyEda.com` : https://easyeda.com
 
 
 Les cartes électroniques
@@ -61,6 +64,14 @@ Les cartes électroniques
    :align: center
    
    Fichier Gerber carte principale
+   
+.. figure:: images/cartePrincipale.jpg
+   :width: 300 px
+   :figwidth: 100%
+   :align: center
+   
+   Fichier Gerber carte carteurs infrarouge   
+
 
 Liste des composants
 ===========================
@@ -120,6 +131,13 @@ et souder 15cm de fil noir et rouge sur les moteurs (le fil rouge à doite)
 Penser à étamer l'autre extrêmité de chaque fil cela facilitera l'insertion dans les connecteur à
 vis de la carte L9110.
 
+.. figure:: images/L9110.jpg
+   :width: 200 px
+   :figwidth: 100%
+   :align: center
+   
+   Détail borniers de la carte L9110
+
 Attention cette opération est délicate et les broches métalique de ces petits moteurs bon marcher 
 sont fragile. Si vous ne le sentez pas poussez la porte d'un fablab près de chez vous,
 il y aura certainement une bonne âme pour vous aider.
@@ -136,7 +154,7 @@ Liste des outils nécessaires
 - clé tube de 5.5 et 7
 - tournevis plat plus petit que 3.5mm (lergeur de la lame)
 
-Les éatpes du montage
+Les étapes du montage
 +++++++++++++++++++++++
 
 #. monter les 4 colonnettes nylon sur le châssis
@@ -148,6 +166,7 @@ Les éatpes du montage
 #. connecter les 3 boîtiers de piles à la carte principale
 #. relier la carte capteurs infrarouge à la carte principale
 #. insérer la carte ARDUINO dans son emplacement
+#. connecter les moteur à la carte L9110 puis mettre celle-ci en place sur la carte principal
 #. Oui vous pouvez mettre les roues !
 
 
@@ -164,7 +183,10 @@ Les éatpes du montage
    :figwidth: 100%
    :align: center
    
-   Détail de la petite équerre.   
+   Détail de la petite équerre.  
+
+Attention les fils rouges des moteurs doivent être connecté en partant du centre de la L9110.
+Attention également à bien connecter le moteur de droite à droite !   
 
 Programmer son robot
 =========================
@@ -183,13 +205,20 @@ Le site officiel `ARDUINO`_
 
 Un bon tuto sur `OpenClassRoom`_
 
-.. _`OpenClassRoom` : https://openclassrooms.com/fr/courses/2778161-programmez-vos-premiers-montages-avec-arduino
-
 `Python dans une ATMega2560`_ pour les spécialistes
+
+.. _`ARDUINO` : https://www.arduino.cc/
+
+.. _`OpenClassRoom` : https://openclassrooms.com/fr/courses/2778161-programmez-vos-premiers-montages-avec-arduino
 
 .. _`Python dans une ATMega2560` :  https://forum.arduino.cc/index.php?topic=7558.0
 
-.. _`ARDUINO` : https://www.arduino.cc/
+
+
+On pourra aussi envisager d'autres options comme des moustaches, un capteur pour suiveur de ligne...
+
+Egalement l'option batterie 16850.
+
 
 Weblinks
 =============
