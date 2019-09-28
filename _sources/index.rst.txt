@@ -3,11 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
    
-Bienvenue  dans la documlentation du projet Permis C 2019
-============================================================
 
-Infos générales sur le projet
-======================================
+Infos générales sur le projet Permis C 2019
+==============================================
 
    :Auteur:            `VoLAB <http://www.vorobotics.com/wp/>`_
    :Projet:             Permis C 2019
@@ -209,9 +207,13 @@ Attention également à bien connecter le moteur de droite à droite !
 
 Programmer son robot
 =========================
-La programmation du robot se fait grâce à MBlock de chez `MakeBlock`_ link_desc
+La programmation du robot se fait grâce à MBlock de chez `MakeBlock`_
 
 .. _`MakeBlock` : https://www.makeblock.com/
+
+Et pour vous aider, Professeur Gilles ;-) nous a rédigé de jolies `fiches pédagogiques`_
+
+.. _`fiches pédagogiques` :  https://github.com/volab/permisC2019/tree/master/_01-docs/_01-userDoc/fiches_peda_pcb_sansvariable/doc_peda_pcb_sansvariable_pdf
 
 Pour aller plus loin
 ======================
