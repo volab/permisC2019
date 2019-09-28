@@ -17,12 +17,12 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'PermisC_2019'
+project = 'PermisC 2019'
 copyright = '2019, VoLAB'
 author = 'VoLAB'
 
 # The full version, including alpha/beta/rc tags
-release = '0'
+release = ''
 
 
 # -- General configuration ---------------------------------------------------
@@ -54,9 +54,17 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '.ffs_db']
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'classic'
+
+html_theme_options = {
+    "body_max_width" : "60%"
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+html_logo = 'logoVoLAB_200x200.jpg'
+
+

@@ -1,0 +1,226 @@
+++++++++++++++++++++++++++++++++++++++++++++
+Documentation du projet
+++++++++++++++++++++++++++++++++++++++++++++
+
+.. contents:: Table of Contents
+
+.. section-numbering::
+
+
+
+Présentation
+=================
+Il s'agit à la fois de décrire ici un atelier d'initiation à la programmation à destination
+des collégiens et lycéens ansi que la conception d'un robot 2 roues conçu par le VoLAB spécialement
+à cette occasion.
+
+.. figure:: permisC2019_robotAppercu.jpg
+   :width: 500 px
+   :figwidth: 100%
+   :alt: alternate text
+   :align: center
+   
+   Le robot Permis C 2019
+   
+Caractéristiques du robot
+========================================
+- Capteurs: 3 capteurs ultra son SRF-04 à l'avant, 3 capteur infrarouge à l'arrière
+- Motorisation : 2 moteurs à courant continu  200R / min 1:48 
+- Driver moteur : L9110S
+- Calculateur : Arduino 2560 Pro
+- 1 buzer
+- 7 LED
+- Diamètre des roues : 65mm
+- Dimension: 220x130x85mm 
+- Masse: 450g sans les piles
+- Alimentation: 6 piles AA
+
+Assembler son Robot
+====================
+
+Voici les grandes étapes pour fabriquer notre robot.
+
+#. Commander les 2 cartes électronique sur le site `EasyEda.com`_  (tips commandez les cartes
+nues chez le partenaire d'EasyEDA à soir Jlpcb qui est en liens directes depuis le site de EasyEDA)
+
+#. commander les composants
+
+#. souder les composants sur la carte principale et sur la carte capteur infrarouge
+
+.. _`EasyEda.com` : https://easyeda.com
+
+
+Les cartes électroniques
+==========================
+`Carte principale`_ et `Carte capteurs infrarouge`_
+
+.. _`Carte principale` : https://easyeda.com/VoLab-Team/eduRobot
+
+.. _`Carte capteurs infrarouge` : https://easyeda.com/VoLab-Team/eduRobotCarte2
+
+.. figure:: images/cartePrincipale.jpg
+   :width: 400 px
+   :figwidth: 100%
+   :align: center
+   
+   Fichier Gerber carte principale
+   
+.. figure:: images/cartePrincipale.jpg
+   :width: 300 px
+   :figwidth: 100%
+   :align: center
+   
+   Fichier Gerber carte carteurs infrarouge   
+
+
+Liste des composants
+===========================
+
+`cliquez ici <liste_matos_190921_2203.html>`_
+
+Souder les composants sur les cartes
+======================================
+On commencera par les composants les moins hauts (comme les résistances) pour terminer 
+avec les composants les plus hauts comme les capteurs ultrasons
+
+Attention le buzzer à un sens de montage qui ne figure pas sur la sérigraphie de la carte (un oubli)
+
+.. figure:: images/sensBuzerDetail.png
+   :width: 200 px
+   :figwidth: 100%
+   :align: center
+   
+   Sens de montage du buzer (tourné vers l'arrière)
+
+Idem pour les connecteurs des piles.
+
+.. figure:: images/buzerEtConnecteurPiles.jpg
+   :width: 500 px
+   :figwidth: 100%
+   :align: center
+   
+   Sens des embase XH de piles
+
+Préparer les connecteurs des blocs de piles (qui sont livrés sans connecteur).
+
+Attention au sens des fils comme sur la photo ci-dessous
+
+.. figure:: images/pinceEtBlocPile.jpg
+   :width: 500 px
+   :figwidth: 100%
+   :align: center
+   
+   Pince et bloc de piles
+   
+.. figure:: images/detailConnecteur pile.jpg
+   :width: 200 px
+   :figwidth: 100%
+   :align: center
+   
+   Détail connecteur pile   
+   
+et souder 15cm de fil noir et rouge sur les moteurs (le fil rouge à doite)
+
+.. figure:: images/moteur.jpg
+   :width: 300 px
+   :figwidth: 100%
+   :align: center
+   
+   Fils souder sur le moteur
+   
+Penser à étamer l'autre extrêmité de chaque fil cela facilitera l'insertion dans les connecteur à
+vis de la carte L9110.
+
+.. figure:: images/L9110.jpg
+   :width: 200 px
+   :figwidth: 100%
+   :align: center
+   
+   Détail borniers de la carte L9110
+
+Attention cette opération est délicate et les broches métalique de ces petits moteurs bon marcher 
+sont fragile. Si vous ne le sentez pas poussez la porte d'un fablab près de chez vous,
+il y aura certainement une bonne âme pour vous aider.
+
+
+Montage mécanique
+===================
+
+Liste des outils nécessaires
++++++++++++++++++++++++++++++++++
+- Tournevis crussiforme PH1
+- clés 6 pans de 2, 2.5 et 3 mm
+- clés plate de 5.5 et 7
+- clé tube de 5.5 et 7
+- tournevis plat plus petit que 3.5mm (lergeur de la lame)
+
+Les étapes du montage
++++++++++++++++++++++++
+
+#. monter les 4 colonnettes nylon sur le châssis
+#. montage des moteurs (ne pas mettre les roues tout de suite)
+#. monter les 3 blocs de piles
+#. monter la carte capteur infrarouge à l'arrière avec sa chargnière (opération un peu délicate)
+#. monter le bal caster en dessous (la bille)
+#. monter la carte électronique principale
+#. connecter les 3 boîtiers de piles à la carte principale
+#. relier la carte capteurs infrarouge à la carte principale
+#. insérer la carte ARDUINO dans son emplacement
+#. connecter les moteur à la carte L9110 puis mettre celle-ci en place sur la carte principal
+#. Oui vous pouvez mettre les roues !
+
+
+
+.. figure:: images/charniereArriere.jpg
+   :width: 500 px
+   :figwidth: 100%
+   :align: center
+   
+   Détail charnière arrière
+   
+.. figure:: images/detailEquerre.jpg
+   :width: 200 px
+   :figwidth: 100%
+   :align: center
+   
+   Détail de la petite équerre.  
+
+Attention les fils rouges des moteurs doivent être connecté en partant du centre de la L9110.
+Attention également à bien connecter le moteur de droite à droite !   
+
+Programmer son robot
+=========================
+La programmation du robot se fait grâce à MBlock de chez `MakeBlock`_ link_desc
+
+.. _`MakeBlock` : https://www.makeblock.com/
+
+Pour aller plus loin
+======================
+Si vous le désirer ce robot peut également être programmer en langage C, en Python... 
+mais c'est une autre hostoire...
+
+Voici donc quelques liens :
+
+Le site officiel `ARDUINO`_
+
+Un bon tuto sur `OpenClassRoom`_
+
+`Python dans une ATMega2560`_ pour les spécialistes
+
+.. _`ARDUINO` : https://www.arduino.cc/
+
+.. _`OpenClassRoom` : https://openclassrooms.com/fr/courses/2778161-programmez-vos-premiers-montages-avec-arduino
+
+.. _`Python dans une ATMega2560` :  https://forum.arduino.cc/index.php?topic=7558.0
+
+
+
+On pourra aussi envisager d'autres options comme des moustaches, un capteur pour suiveur de ligne...
+
+Egalement l'option batterie 16850.
+
+
+Weblinks
+=============
+
+.. target-notes::

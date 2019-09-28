@@ -8,7 +8,7 @@ if "%SPHINXBUILD%" == "" (
 	set SPHINXBUILD=sphinx-build
 )
 set SOURCEDIR=source
-set BUILDDIR=../../../../webdoc
+set BUILDDIR=..\..\..\..\webdoc
 
 if "%1" == "" goto help
 
@@ -26,6 +26,14 @@ if errorlevel 9009 (
 )
 
 %SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
+REM @ECHO ON
+echo variable_O : %O%, Buildir : %BUILDDIR%, source dir : %SOURCEDIR% 
+echo variable option : %SPHINXOPTS% : premier parametre : %1
+set HTMLDESTDIR=%BUILDDIR%\%1
+
+echo html dest dir : %HTMLDESTDIR%
+copy %SOURCEDIR%\*.html %HTMLDESTDIR%
+
 goto end
 
 :help
