@@ -42,7 +42,7 @@ des collégiens et lycéens ansi que la conception d'un robot 2 roues conçu par
    
 Caractéristiques du robot
 ========================================
-- Capteurs: 3 capteurs ultra son SRF-04 à l'avant, 3 capteur infrarouge à l'arrière
+- Capteurs: 3 capteurs ultra son SRF-04 à l'avant, 3 capteurs infrarouge à l'arrière
 - Motorisation : 2 moteurs à courant continu  200R / min 1:48 
 - Driver moteur : L9110S
 - Calculateur : Arduino 2560 Pro
@@ -59,7 +59,7 @@ Assembler son Robot
 Voici les grandes étapes pour fabriquer notre robot.
 
 #. Commander les 2 cartes électronique sur le site `EasyEda.com`_  (tips commandez les cartes
-nues chez le partenaire d'EasyEDA à soir Jlpcb qui est en liens directes depuis le site de EasyEDA)
+nues chez le partenaire d'EasyEDA à savoir Jlpcb qui est en liens directes depuis le site de EasyEDA)
 
 #. commander les composants
 
@@ -237,7 +237,7 @@ Et pour vous aider, Professeur Gilles ;-) nous a rédigé de jolies `fiches péd
 Pour aller plus loin
 ======================
 Si vous le désirer ce robot peut également être programmer en langage C, en Python... 
-mais c'est une autre hostoire...
+mais c'est une autre histoire...
 
 Voici donc quelques liens :
 
@@ -245,11 +245,15 @@ Le site officiel `ARDUINO`_
 
 Un bon tuto sur `OpenClassRoom`_
 
+Fabrication d'un `Labyrinthe avec des cartons et des pièces imprimées en 3D`_
+
 `Python dans une ATMega2560`_ pour les spécialistes
 
 .. _`ARDUINO` : https://www.arduino.cc/
 
 .. _`OpenClassRoom` : https://openclassrooms.com/fr/courses/2778161-programmez-vos-premiers-montages-avec-arduino
+
+.. _`Labyrinthe avec des cartons et des pièces imprimées en 3D` : https://www.google.com/search?client=firefox-b-d&channel=crow&q=labirynthe
 
 .. _`Python dans une ATMega2560` :  https://forum.arduino.cc/index.php?topic=7558.0
 
