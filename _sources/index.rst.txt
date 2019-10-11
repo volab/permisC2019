@@ -42,7 +42,7 @@ des collégiens et lycéens ansi que la conception d'un robot 2 roues conçu par
    
 Caractéristiques du robot
 ========================================
-- Capteurs: 3 capteurs ultra son SRF-04 à l'avant, 3 capteur infrarouge à l'arrière
+- Capteurs: 3 capteurs ultra son SRF-04 à l'avant, 3 capteurs infrarouge à l'arrière
 - Motorisation : 2 moteurs à courant continu  200R / min 1:48 
 - Driver moteur : L9110S
 - Calculateur : Arduino 2560 Pro
@@ -59,7 +59,7 @@ Assembler son Robot
 Voici les grandes étapes pour fabriquer notre robot.
 
 #. Commander les 2 cartes électronique sur le site `EasyEda.com`_  (tips commandez les cartes
-nues chez le partenaire d'EasyEDA à soir Jlpcb qui est en liens directes depuis le site de EasyEDA)
+nues chez le partenaire d'EasyEDA à savoir Jlpcb qui est en liens directes depuis le site de EasyEDA)
 
 #. commander les composants
 
@@ -160,6 +160,16 @@ Attention cette opération est délicate et les broches métalique de ces petits
 sont fragile. Si vous ne le sentez pas poussez la porte d'un fablab près de chez vous,
 il y aura certainement une bonne âme pour vous aider.
 
+Ajout de dernière minute. Suite à nos essais, nous avons constaté qu'il convient d'ajouter un 
+condensateur de filtrage sur l'alimentation des moteurs de 470uF/16V.
+
+.. figure:: images/capaAjoutee.jpg
+   :width: 200 px
+   :figwidth: 100%
+   :alt: Condesateur alimentation moteur
+   :align: center
+   
+   Condensateur 470uF/16 sur l'alimentation moteur 
 
 Montage mécanique
 ===================
@@ -187,6 +197,13 @@ Les étapes du montage
 #. connecter les moteur à la carte L9110 puis mettre celle-ci en place sur la carte principal
 #. Oui vous pouvez mettre les roues !
 
+.. figure:: images/emplacementcolonette.jpg
+   :width: 500 px
+   :figwidth: 100%
+   :alt: emplacement colonettes
+   :align: center
+   
+   Emplacement des 4 colonettes - trous filetés pas besoin d'écrou
 
 
 .. figure:: images/charniereArriere.jpg
@@ -237,7 +254,7 @@ Et pour vous aider, Professeur Gilles ;-) nous a rédigé de jolies `fiches péd
 Pour aller plus loin
 ======================
 Si vous le désirer ce robot peut également être programmer en langage C, en Python... 
-mais c'est une autre hostoire...
+mais c'est une autre histoire...
 
 Voici donc quelques liens :
 
@@ -245,11 +262,19 @@ Le site officiel `ARDUINO`_
 
 Un bon tuto sur `OpenClassRoom`_
 
+Fabrication d'un `Labyrinthe avec des cartons et des pièces imprimées en 3D`_
+
+`Un générateur de labyrinthe`_
+
 `Python dans une ATMega2560`_ pour les spécialistes
 
 .. _`ARDUINO` : https://www.arduino.cc/
 
 .. _`OpenClassRoom` : https://openclassrooms.com/fr/courses/2778161-programmez-vos-premiers-montages-avec-arduino
+
+.. _`Labyrinthe avec des cartons et des pièces imprimées en 3D` : https://www.google.com/search?client=firefox-b-d&channel=crow&q=labirynthe
+
+.. _`Un générateur de labyrinthe` : http://www.mazegenerator.net/
 
 .. _`Python dans une ATMega2560` :  https://forum.arduino.cc/index.php?topic=7558.0
 
