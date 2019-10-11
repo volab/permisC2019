@@ -187,6 +187,13 @@ Les étapes du montage
 #. connecter les moteur à la carte L9110 puis mettre celle-ci en place sur la carte principal
 #. Oui vous pouvez mettre les roues !
 
+.. figure:: images/emplacementcolonette.jpg
+   :width: 500 px
+   :figwidth: 100%
+   :alt: emplacement colonettes
+   :align: center
+   
+   Emplacement des 4 colonettes - trous filetés pas besoin d'écrou
 
 
 .. figure:: images/charniereArriere.jpg
@@ -247,6 +254,8 @@ Un bon tuto sur `OpenClassRoom`_
 
 Fabrication d'un `Labyrinthe avec des cartons et des pièces imprimées en 3D`_
 
+`Un générateur de labyrinthe`_
+
 `Python dans une ATMega2560`_ pour les spécialistes
 
 .. _`ARDUINO` : https://www.arduino.cc/
@@ -254,6 +263,8 @@ Fabrication d'un `Labyrinthe avec des cartons et des pièces imprimées en 3D`_
 .. _`OpenClassRoom` : https://openclassrooms.com/fr/courses/2778161-programmez-vos-premiers-montages-avec-arduino
 
 .. _`Labyrinthe avec des cartons et des pièces imprimées en 3D` : https://www.google.com/search?client=firefox-b-d&channel=crow&q=labirynthe
+
+.. _`Un générateur de labyrinthe` : http://www.mazegenerator.net/
 
 .. _`Python dans une ATMega2560` :  https://forum.arduino.cc/index.php?topic=7558.0
 
