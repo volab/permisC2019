@@ -160,6 +160,16 @@ Attention cette opération est délicate et les broches métalique de ces petits
 sont fragile. Si vous ne le sentez pas poussez la porte d'un fablab près de chez vous,
 il y aura certainement une bonne âme pour vous aider.
 
+Ajout de dernière minute. Suite à nos essais, nous avons constaté qu'il convient d'ajouter un 
+condensateur de filtrage sur l'alimentation des moteurs de 470uF/16V.
+
+.. figure:: images/capaAjoutee.jpg
+   :width: 200 px
+   :figwidth: 100%
+   :alt: Condesateur alimentation moteur
+   :align: center
+   
+   Condensateur 470uF/16 sur l'alimentation moteur 
 
 Montage mécanique
 ===================
