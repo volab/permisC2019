@@ -42,7 +42,7 @@ des collégiens et lycéens ansi que la conception d'un robot 2 roues conçu par
    
 Caractéristiques du robot
 ========================================
-- Capteurs: 3 capteurs ultra son SRF-04 à l'avant, 3 capteurs infrarouge à l'arrière
+- Capteurs: 3 capteurs ultra son SRF-04 à l'avant (détection 2cm à 3m), 3 capteurs infrarouge à l'arrière
 - Motorisation : 2 moteurs à courant continu  200R / min 1:48 
 - Driver moteur : L9110S
 - Calculateur : Arduino 2560 Pro
@@ -268,6 +268,12 @@ Fabrication d'un `Labyrinthe avec des cartons et des pièces imprimées en 3D`_
 
 `Python dans une ATMega2560`_ pour les spécialistes
 
+`Reduicing lobe of SRF-04`_
+
+Autre capteur à ultrason SRF-02 en I2C
+
+
+
 .. _`ARDUINO` : https://www.arduino.cc/
 
 .. _`OpenClassRoom` : https://openclassrooms.com/fr/courses/2778161-programmez-vos-premiers-montages-avec-arduino
@@ -278,7 +284,7 @@ Fabrication d'un `Labyrinthe avec des cartons et des pièces imprimées en 3D`_
 
 .. _`Python dans une ATMega2560` :  https://forum.arduino.cc/index.php?topic=7558.0
 
-
+.. _`Reduicing lobe of SRF-04` : https://www.robot-electronics.co.uk/htm/reducing_sidelobes_of_srf10.htm
 
 On pourra aussi envisager d'autres options comme des moustaches, un capteur pour suiveur de ligne...
 
