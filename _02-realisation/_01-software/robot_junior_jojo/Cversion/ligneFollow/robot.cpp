@@ -69,8 +69,8 @@ void CRobotJunior::update(){
                 if(capteurLigneGauche >= 2 ){
                             forceTourne = forceTourne * 2;
 
-                        }
-                        if(capteurLigneGauche >= 4 ){
+                }
+                if(capteurLigneGauche >= 4 ){
                     forceTourne = forceTourne * 2;
 
                 }
