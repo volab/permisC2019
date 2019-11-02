@@ -57,7 +57,7 @@ class CRobotJunior{
         void _tourneGauche( int force );
         void _tourneDroite( int force );
         unsigned long _prevMillis;
-        void stop();
+        void _stop();
         
 	
 };

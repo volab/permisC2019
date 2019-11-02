@@ -93,6 +93,8 @@ void CRobotJunior::update(){
 void CRobotJunior::_initLeds(){
     _ledAvantGauche.begin( LED_AVANT_GAUCHE_PIN , 100, 500 );
     _ledAvantDroite.begin( LED_AVANT_DROITE_PIN, 100,500 );
+    _ledArriereDroite.begin( LED_ARRIERE_DROITE_PIN );
+    _ledArriereGauche.begin( LED_ARRIERE_GAUCHE_PIN );    
     _ledCapteurGauche.begin( LED_SENSOR_GAUCHE_PIN );
     _ledCapteurCentre.begin( LED_SENSOR_CENTRE_PIN );
     _ledCapteurDroite.begin( LED_SENSOR_DROITE_PIN );
