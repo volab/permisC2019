@@ -7,31 +7,33 @@
  @brief Parmis C ligne follower version configuration file
 */
 
-#ifndef _CONFIG8PERMISC_H
-#define _CONFIG8PERMISC_H
+#ifndef _CONFIG_PERMISC_H
+#define _CONFIG_PERMISC_H
 
 #define MAQUETTE_VERSION // comment for PCB version
 
-    #define LED_AVANT_GAUCHE_PIN 27
-    #define LED_AVANT_DROITE_PIN 5
-    
-    #define LED_ARRIERE_GAUCHE_PIN 47
-    #define LED_ARRIERE_DROITE_PIN 33
-    
-    #define LED_SENSOR_GAUCHE_PIN 31
-    #define LED_SENSOR_CENTRE_PIN 25
-    #define LED_SENSOR_DROITE_PIN 11
-    
-    #define IR_SENSOR_GAUCHE_PIN 22
-    #define IR_SENSOR_CENTRE_PIN 24
-    #define IR_SENSOR_DROITE_PIN 26
-    
-    #define MOTEUR_GAUCHE_SENS_PIN 46 // S = 0 <=> marche AVANT
-    #define MOTEUR_DROITE_SENS_PIN 45
-    #define MOTEUR_GAUCHE_VITS_PIN 44 // vitesse marche avant 70 à 250 de 150 à 10 en arrière
-    #define MOTEUR_DROITE_VITS_PIN 12
-    
-    #define BUZZER_PIN 4
+#define TEMPS_CYCLE 5 //ms
+
+#define LED_AVANT_GAUCHE_PIN 27
+#define LED_AVANT_DROITE_PIN 5
+
+#define LED_ARRIERE_GAUCHE_PIN 47
+#define LED_ARRIERE_DROITE_PIN 33
+
+#define LED_SENSOR_GAUCHE_PIN 31
+#define LED_SENSOR_CENTRE_PIN 25
+#define LED_SENSOR_DROITE_PIN 11
+
+#define IR_SENSOR_GAUCHE_PIN 22
+#define IR_SENSOR_CENTRE_PIN 24
+#define IR_SENSOR_DROITE_PIN 26
+
+#define MOTEUR_GAUCHE_SENS_PIN 46 // S = 0 <=> marche AVANT
+#define MOTEUR_DROITE_SENS_PIN 45
+#define MOTEUR_GAUCHE_VITS_PIN 44 // vitesse marche avant 70 à 250 de 150 à 10 en arrière
+#define MOTEUR_DROITE_VITS_PIN 12
+
+#define BUZZER_PIN 4
     
 
 #ifdef MAQUETTE_VERSION
@@ -70,4 +72,4 @@
 
 #endif
 
- 
+#endif
