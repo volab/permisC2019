@@ -59,7 +59,7 @@ void CRobotJunior::update(){
                     forceTourne = forceTourne * 2;
 
                 }
-                Serial.println("forceTourne droite = " + String( forceTourne ) );
+                // Serial.println("forceTourne droite = " + String( forceTourne ) );
                 _tourneDroite(forceTourne);
                 _allumeLedDroite();
 
@@ -74,7 +74,7 @@ void CRobotJunior::update(){
                     forceTourne = forceTourne * 2;
 
                 }
-                Serial.println("forceTourne gauche = " + String( forceTourne ) );
+                // Serial.println("forceTourne gauche = " + String( forceTourne ) );
                 _tourneGauche(forceTourne);
                 _allumLedGauche();
 
