@@ -41,8 +41,14 @@ void CRobotJunior::update(){
         int forceTourne;
         byte capteurLigneDroite = _liner.getValueDroite();
         byte capteurLigneGauche = _liner.getValueGauche();
+        // Serial.println( "Capteur droit = " + String( capteurLigneDroite ) );
         // Serial.print( "D = " + String( capteurLigneDroite ) );
         // Serial.println( "\tG = " + String( capteurLigneGauche ) );
+        if ( capteurLigneDroite == 7 && capteurLigneGauche == 7 ){
+            _motG.stop();
+            _motD.stop(); 
+            return;            
+        }
         if(( capteurLigneDroite == 0)  &&  ( capteurLigneGauche == 0 )){
             _motG.avance( _vitesseDeBase );
             _motD.avance( _vitesseDeBase );
