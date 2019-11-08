@@ -2,7 +2,8 @@
    sphinx-quickstart on Sun Sep 15 00:07:13 2019.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
-   
+
+ 
 
 Infos générales sur le projet Permis C 2019
 ==============================================
@@ -21,10 +22,6 @@ Documentation du projet
 =============================
 
 .. contents:: Table of Contents
-
-.. section-numbering::
-
-
 
 Présentation
 =================
@@ -45,13 +42,15 @@ Caractéristiques du robot
 - Capteurs: 3 capteurs ultra son SRF-04 à l'avant (détection 2cm à 3m), 3 capteurs infrarouge à l'arrière
 - Motorisation : 2 moteurs à courant continu  200R / min 1:48 
 - Driver moteur : L9110S
-- Calculateur : Arduino 2560 Pro
+- Calculateur : `Arduino 2560 Pro`_ 
 - 1 buzer
 - 7 LED
 - Diamètre des roues : 65mm
 - Dimension: 220x130x85mm 
 - Masse: 450g sans les piles
 - Alimentation: 6 piles AA
+
+.. _`Arduino 2560 Pro` : https://fr.aliexpress.com/item/32801785024.html?spm=a2g0o.detail.100009.6.3dea3fceJMWQWs&gps-id=pcDetailLeftTopSell&scm=1007.13482.95643.0&scm_id=1007.13482.95643.0&scm-url=1007.13482.95643.0&pvid=aa496370-b4ed-46e5-bfa7-abd4fd28e917
 
 Assembler son Robot
 ====================
@@ -95,6 +94,8 @@ Liste des composants
 ===========================
 
 `cliquez ici <liste_matos_190921_2203.html>`_
+
+Attention il existe 2 type de cartes 2560 pro une avec connecteur usb et l'autre sans !
 
 Souder les composants sur les cartes
 ======================================
@@ -274,11 +275,12 @@ Autre capteur à ultrason SRF-02 en I2C
 
 
 
+
 .. _`ARDUINO` : https://www.arduino.cc/
 
 .. _`OpenClassRoom` : https://openclassrooms.com/fr/courses/2778161-programmez-vos-premiers-montages-avec-arduino
 
-.. _`Labyrinthe avec des cartons et des pièces imprimées en 3D` : https://www.google.com/search?client=firefox-b-d&channel=crow&q=labirynthe
+.. _`Labyrinthe avec des cartons et des pièces imprimées en 3D` : https://www.thingiverse.com/thing:407522
 
 .. _`Un générateur de labyrinthe` : http://www.mazegenerator.net/
 
@@ -289,6 +291,13 @@ Autre capteur à ultrason SRF-02 en I2C
 On pourra aussi envisager d'autres options comme des moustaches, un capteur pour suiveur de ligne...
 
 Egalement l'option batterie 16850.
+
+#####
+
+.. toctree::
+   :maxdepth: 2
+
+   /advanced/advanced
 
 
 Weblinks

@@ -44,7 +44,7 @@ void CRobotJunior::update(){
         // Serial.println( "Capteur droit = " + String( capteurLigneDroite ) );
         // Serial.print( "D = " + String( capteurLigneDroite ) );
         // Serial.println( "\tG = " + String( capteurLigneGauche ) );
-        if ( capteurLigneDroite == 7 && capteurLigneGauche == 7 ){
+        if ( capteurLigneDroite == 7 && capteurLigneGauche == 7 ){ //stop if no ground
             _motG.stop();
             _motD.stop(); 
             return;            
