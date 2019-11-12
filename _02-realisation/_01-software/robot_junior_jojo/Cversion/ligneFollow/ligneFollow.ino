@@ -17,7 +17,7 @@
 #define RSSPEED 9600
 
 CRobotJunior robot;
-RH_ASK driver(2000, TLMRXPIN, TLMTXPIN, 0); // 19 txpin
+// RH_ASK driver(2000, TLMRXPIN, TLMTXPIN, 0); // 19 txpin
 
 //A0 to sens batterie via un pont diviseur par 2 ou A1 VIn passe pas loin
 
@@ -28,24 +28,24 @@ unsigned long prevMillis;
 void setup(){
     Serial.begin( RSSPEED );
     Serial.println( "Sketch start...");
-    // robot.init( TEMPS_CYCLE );
-    pinMode(LEDVERIF, OUTPUT);
-        if (!driver.init())
-         Serial.println("init failed");
+    robot.init( TEMPS_CYCLE );
+    // pinMode(LEDVERIF, OUTPUT);
+        // if (!driver.init())
+         // Serial.println("init failed");
 
     
 }
 
 bool ledState;
 void loop(){
-        // robot.update();
-    const char *msg = "hello"; // 5x5ms=25ms @2000bits/s
+        robot.update();
+    // const char *msg = "hello"; // 5x5ms=25ms @2000bits/s
 
-    driver.send((uint8_t *)msg, strlen(msg));
-    driver.waitPacketSent();
-    delay(1000);
-    ledState = !ledState;
-    digitalWrite( LEDVERIF, ledState );
+    // driver.send((uint8_t *)msg, strlen(msg));
+    // driver.waitPacketSent();
+    // delay(1000);
+    // ledState = !ledState;
+    // digitalWrite( LEDVERIF, ledState );
 
     
 }
