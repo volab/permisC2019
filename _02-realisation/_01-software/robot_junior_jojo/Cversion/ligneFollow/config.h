@@ -14,7 +14,7 @@
 
 #define TEMPS_CYCLE 5 //ms
 
-#define VITESSE_DE_BASE 70
+#define VITESSE_DE_BASE 90
 
 #define LED_AVANT_GAUCHE_PIN 27
 #define LED_AVANT_DROITE_PIN 5
