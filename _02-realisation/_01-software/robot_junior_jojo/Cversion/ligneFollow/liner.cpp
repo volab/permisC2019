@@ -31,11 +31,15 @@ void CRjLiner::begin(
 void CRjLiner::update(){
         if ( millis()-_previousMillis  > _samplePeriod ){ 
             _previousMillis = millis();
-            _value = 0;
-            for ( int i = 0; i < 6 ; i++ ){
-                _value += ( (_irSensor[i].directRead()) << i );
-            }
-            _valueD = _value / 8;
-            _valueG = _value % 8;
+            forceUpdate();
         }
 } 
+
+void CRjLiner::forceUpdate(){
+    _value = 0;
+    for ( int i = 0; i < 6 ; i++ ){
+        _value += ( (_irSensor[i].directRead()) << i );
+    }
+    _valueD = _value / 8;
+    _valueG = _value % 8;    
+}

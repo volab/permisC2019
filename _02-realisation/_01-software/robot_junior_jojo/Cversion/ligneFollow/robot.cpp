@@ -33,7 +33,7 @@ void CRobotJunior::init( unsigned long tempsCycle ){
 void CRobotJunior::update(){
     _updateLeds();
     _updatesSensors();
-    _liner.update();
+    _liner.forceUpdate();
     _buz.update(); 
     if ( millis() - _prevMillis > _tempsCycle ){
         _prevMillis = millis();
