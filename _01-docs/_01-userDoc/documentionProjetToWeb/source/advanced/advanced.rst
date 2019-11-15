@@ -6,7 +6,7 @@ Advanced stuf for robot Junior
 Suiveur de ligne
 ======================================
 
-3 capteur IR de chaque côté
+3 capteurs IR de chaque côté
 
 
 Ajout d'un connecteur 8 points.
@@ -32,10 +32,32 @@ Ajout d'un connecteur 8 points.
 +-------+------------+-------------+
 
 ======================================
-Télémètrie
+Télémètrie / RF transmissions
 ======================================
 
-Choix du module RF
+Besoin  débit 
+======================================
+Exemple:
+
+On part sur 32 octets soit 320bits en moins de 1ms à transmettre
+
+1 bits (1/320)ms = 3.215 10-6 environ 312kbits/s
+
+Trame: (séparateur ,)
+
+Sensor gauche (1c),Sensor droit (1c),Vbat(3c),reserve (3c) soit 11 octets
+
+Exemple:
+
+4,0,3.2,0.0
+
+11 octets trasmis en 1ms (max)
+
+10-3/110 = 9us/bits soit 110kbits/s
+
+
+Choix du module RF 
+======================================
 
 Très bonne vidéo youtube:  `Electronoobs`_
 
@@ -98,6 +120,15 @@ Les `modules NRF24RL01`_ utilsés proviennent de chez Amazon.
    :align: left
    
    NRF24L01 modules
+
+.. figure:: images/NRF24pinout.png
+   :width: 300 px
+   :figwidth: 100%
+   :alt: NRF24L01 modules
+   :align: left
+   
+   NRD24L01 pinout
+
 
 Réussite. Transfert de 4 puis 8 octets à 2Mbps.
 
@@ -277,6 +308,19 @@ On atteind facilement les extrémité du lab en conservant 1.5ms.
 
 .. WARNING::
     Les broche 7 et 8 étaient inversée.
+    
+.. code:: cpp
+
+    /**
+   * Arduino Constructor
+   *
+   * Creates a new instance of this driver.  Before using, you create an instance
+   * and send in the unique pins that this chip is connected to.
+   *
+   * @param _cepin The pin attached to Chip Enable on the RF module
+   * @param _cspin The pin attached to Chip Select
+   */
+    RF24(uint16_t _cepin, uint16_t _cspin);
 
 Temps d'émission mesuré avec la technique de micros : 700us entre mon poste et l'autre extrêmité
 du lab.
@@ -286,6 +330,43 @@ du lab.
 .. _`modules NRF24RL01` :  https://www.amazon.fr/Pixnor-NRF24L01-%C3%A9metteurr%C3%A9cepteur-Arduino-Compatible/dp/B016BAM80C/ref=sr_1_4?ie=UTF8&qid=1451854927&sr=8-4&keywords=nrf24l01
 
 
+Autres solutions à explorer
+======================================
+XBEE : product line sur protocole ZigBee
+
+Diffcile à approvisionner sur le marcher chinois et relativement honéreux.
+
+Dispo `XBEE chez MOUSER`_ à 18€ sans antenne sachant qu'il en faut au moins 2
+
+Préférer les modules en 2.4GHz à mon avis (pifométrique)
+
+LORA
+
+BLE4.0
+
+Modules `BLE sur AMAZON`_ à 9.99€ pièce
+
+Modules `BLE sur aliExpress`_ à 2.33€ basé sur un CC2541 de TI
+
+`Exemple ARDUINO`_
+
+`BLE5.0 sur AMAZON`_ 9.99€ basé sur un CC2640R2F de TI
+
+`DSD Tech`_ official website
+
+
+.. _`XBEE chez MOUSER` : https://www.mouser.fr/ProductDetail/Digi-International/XB3-24Z8PT-J?qs=sGAEpiMZZMve4%2FbfQkoj%252BHnv3ft0YYh1ZelV1uOq7SE%3D
+
+.. _`BLE sur AMAZON` : https://www.amazon.com/DSD-TECH-Bluetooth-iBeacon-Arduino/dp/B06WGZB2N4/ref=sr_1_10?keywords=BLE&qid=1573809341&s=electronics&sr=1-10
+
+.. _`BLE sur aliExpress` : https://fr.aliexpress.com/item/32672670920.html?src=google&src=google&albch=shopping&acnt=494-037-6276&isdl=y&slnk=&plac=&mtctp=&albbt=Google_7_shopping&aff_platform=google&aff_short_key=UneMJZVf&&albagn=888888&albcp=6459793138&albag=77316928277&trgt=743612850714&crea=fr32672670920&netw=u&device=c&gclid=Cj0KCQiAtrnuBRDXARIsABiN-7C4xnJh8vQRrAfhBURZXjxJaNliTPFUQSnPELZ7C6L5TvKNkYxi3nsaAoWlEALw_wcB&gclsrc=aw.ds
+
+.. _`Exemple ARDUINO` : https://www.electroschematics.com/getting-started-with-ble-and-arduino/
+
+
+.. _`BLE5.0 sur AMAZON` : https://www.amazon.com/DSD-TECH-Bluetooth-CC2640R2F-Arduino/dp/B07MBLVHH8/ref=sr_1_17?keywords=BLE&qid=1573809341&s=electronics&sr=1-17 
+
+.. _`DSD Tech` : http://www.dsdtech-global.com/2019/01/dsdtech-sh-11-ble.html 
 
 RPM Mesure
 ======================================
@@ -311,30 +392,63 @@ Chargeur de batteries
 
 Right angle gears
 ======================================
-https://www.ebay.com/itm/2pcs-20T-8mm-Metal-Bevel-Gear-Right-Angle-Drive-Gears-Modulus-1-Model-DIY-/222581207784
+`2 pignons 20 dents axe 8mm sur ebay`_ 3.95USD
 
-https://www.ebay.com/itm/2-x-2M-20T-Metal-Umbrella-Tooth-Bevel-Gear-Helical-Motor-Gear-20-Tooth-12mm-Bore/141855562697?_trkparms=aid%3D1110001%26algo%3DSPLICE.SIM%26ao%3D2%26asc%3D20160323102634%26meid%3D991074a4f8944beaad360ae93151d930%26pid%3D100623%26rk%3D2%26rkt%3D6%26sd%3D222581207784%26itm%3D141855562697%26pmt%3D0%26noa%3D1%26pg%3D2047675&_trksid=p2047675.c100623.m-1
+`2 pignons 20 dents axe 12mm sur ebay`_ 16.49USD
 
-https://fr.aliexpress.com/item/32893975748.html?spm=a2g0o.detail.1000014.25.1d144ab8AF9t1d&gps-id=pcDetailBottomMoreOtherSeller&scm=1007.13338.128125.0&scm_id=1007.13338.128125.0&scm-url=1007.13338.128125.0&pvid=ee114c4f-fb10-40a3-9845-00c21843e646
+`1 pignon + 1 roue pas hélicoïdal`_ axe 6mm et 12mm sur ebay 2,9€ 
 
-https://fr.aliexpress.com/item/32890058000.html?src=google&src=google&albch=shopping&acnt=494-037-6276&isdl=y&slnk=&plac=&mtctp=&albbt=Google_7_shopping&aff_platform=google&aff_short_key=UneMJZVf&&albagn=888888&albcp=6459793138&albag=77316928277&trgt=743612850714&crea=fr32890058000&netw=u&device=c&gclid=CjwKCAiAwZTuBRAYEiwAcr67OWbm-ZBNal13bIS6i8peFqKkGNhEntVn4o-RMG5yH6TStwxBTqlUbRoCM6oQAvD_BwE&gclsrc=aw.ds
+`2 pignon axe à choisir de 6 à 15mm 16 ou 20 dents`_ 8.8€ en 16 dents sur ebay
 
-Chercher pignon conique.
-5mm :
+ 
 
-https://fr.aliexpress.com/item/33033437185.html?src=google&src=google&albch=shopping&acnt=494-037-6276&isdl=y&slnk=&plac=&mtctp=&albbt=Google_7_shopping&aff_platform=google&aff_short_key=UneMJZVf&&albagn=888888&albcp=7475390357&albag=84967726950&trgt=296730740870&crea=fr33033437185&netw=u&device=c&gclid=CjwKCAiAwZTuBRAYEiwAcr67OetGz9NlAWIHocH2ge2abL36oHNavBjvfWA0sG9CU37Hhvrhns5EaRoCQPQQAvD_BwE&gclsrc=aw.ds
+.. _`2 pignons 20 dents axe 8mm sur ebay` : https://www.ebay.com/itm/2pcs-20T-8mm-Metal-Bevel-Gear-Right-Angle-Drive-Gears-Modulus-1-Model-DIY-/222581207784
 
-https://fr.aliexpress.com/item/32889357017.html?src=google&src=google&albch=shopping&acnt=494-037-6276&isdl=y&slnk=&plac=&mtctp=&albbt=Google_7_shopping&aff_platform=google&aff_short_key=UneMJZVf&&albagn=888888&albcp=6459788344&albag=76234907246&trgt=743612850874&crea=fr32889357017&netw=u&device=c&gclid=CjwKCAiAwZTuBRAYEiwAcr67ORa5HqUrbmbm7HR9KMinD4LwghugNZx6NpOdj7z_g_jY4a1msZioURoCiNwQAvD_BwE&gclsrc=aw.ds
+.. _`2 pignons 20 dents axe 12mm sur ebay` : https://www.ebay.com/itm/2-x-2M-20T-Metal-Umbrella-Tooth-Bevel-Gear-Helical-Motor-Gear-20-Tooth-12mm-Bore/141855562697?_trkparms=aid%3D1110001%26algo%3DSPLICE.SIM%26ao%3D2%26asc%3D20160323102634%26meid%3D991074a4f8944beaad360ae93151d930%26pid%3D100623%26rk%3D2%26rkt%3D6%26sd%3D222581207784%26itm%3D141855562697%26pmt%3D0%26noa%3D1%26pg%3D2047675&_trksid=p2047675.c100623.m-1
 
-https://fr.aliexpress.com/item/32689486596.html
+.. _`1 pignon + 1 roue pas hélicoïdal` :  https://fr.aliexpress.com/item/32893975748.html?spm=a2g0o.detail.1000014.25.1d144ab8AF9t1d&gps-id=pcDetailBottomMoreOtherSeller&scm=1007.13338.128125.0&scm_id=1007.13338.128125.0&scm-url=1007.13338.128125.0&pvid=ee114c4f-fb10-40a3-9845-00c21843e646
+
+.. _`2 pignon axe à choisir de 6 à 15mm 16 ou 20 dents` : https://fr.aliexpress.com/item/32890058000.html?src=google&src=google&albch=shopping&acnt=494-037-6276&isdl=y&slnk=&plac=&mtctp=&albbt=Google_7_shopping&aff_platform=google&aff_short_key=UneMJZVf&&albagn=888888&albcp=6459793138&albag=77316928277&trgt=743612850714&crea=fr32890058000&netw=u&device=c&gclid=CjwKCAiAwZTuBRAYEiwAcr67OWbm-ZBNal13bIS6i8peFqKkGNhEntVn4o-RMG5yH6TStwxBTqlUbRoCM6oQAvD_BwE&gclsrc=aw.ds
+
+Chercher dans Google pignon conique 5mm :
+
+Sur Aliexpress:
+
+`2 pcs, 20T 5, 6 ou 8mm`_ 3.13€ ! + 4.06€ de FdP
+
+`2 pcs 0.5M 30T engrenage conique alésage 5mm en laiton`_ 10.87€ + 6.62fdp
+
+.. _`2 pcs, 20T 5, 6 ou 8mm` :  https://fr.aliexpress.com/item/33033437185.html?src=google&src=google&albch=shopping&acnt=494-037-6276&isdl=y&slnk=&plac=&mtctp=&albbt=Google_7_shopping&aff_platform=google&aff_short_key=UneMJZVf&&albagn=888888&albcp=7475390357&albag=84967726950&trgt=296730740870&crea=fr33033437185&netw=u&device=c&gclid=CjwKCAiAwZTuBRAYEiwAcr67OetGz9NlAWIHocH2ge2abL36oHNavBjvfWA0sG9CU37Hhvrhns5EaRoCQPQQAvD_BwE&gclsrc=aw.ds
+
+.. _`2 pcs 0.5M 30T engrenage conique alésage 5mm en laiton` : https://fr.aliexpress.com/item/32689486596.html
 
 Cher mais bien :
-https://www.robotshop.com/ca/fr/ensemble-engrenage-conique-21-moyeux-6mm-1-4-servocity.html
+
+`Ensemble d'Engrenage Conique 2:1 (Moyeux de 6mm et 1/4")`_ 26.30€ + FdP ????
+
+.. figure:: images/engrenage90inverse.jpg
+   :width: 300 px
+   :figwidth: 100%
+   :alt: Engrenage Roboshop
+   :align: center
+   
+   Engrenage Roboshop
+
+.. _`Ensemble d'Engrenage Conique 2:1 (Moyeux de 6mm et 1/4")` :  https://www.robotshop.com/ca/fr/ensemble-engrenage-conique-21-moyeux-6mm-1-4-servocity.html
 
 Right angle motors
 ======================================
 Banggood : `GW4058-31ZY - 12V`_ 
-Moteur de boîte de vitesse d'engrenage à vis sans fin de moteur de réduction du moteur CC 12V 110rpm à double arbre
+Moteur de boîte de vitesse d'engrenage à vis sans fin de moteur de réduction du moteur CC 12V 110rpm
+à double arbre.
+ 
+ .. figure:: images/moteur90Banggood.jpg
+   :width: 300 px
+   :figwidth: 100%
+   :alt: Moteur 90° 110rpm Banggood
+   :align: center
+   
+   Moteur 90° 110rpm Banggood
 
 .. _`GW4058-31ZY - 12V` :  https://fr.banggood.com/GW4058-31ZY-Double-Shaft-DC-Motor-12V24V-110rpm220rpm-Reduction-Motor-Worm-Gear-Gear-Box-Motor-p-1357185.html?rmmds=search&ID=520831&cur_warehouse=CN
 
