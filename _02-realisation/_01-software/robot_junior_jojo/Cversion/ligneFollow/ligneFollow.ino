@@ -18,7 +18,7 @@
 
 //RH_ASK (uint16_t speed=2000, uint8_t rxPin=11, uint8_t txPin=12, uint8_t pttPin=10, bool pttInverted=false)
 // 2000 bits/s <=> 500us/bits <=> 5ms/octet
-#define RSSPEED 115200
+#define RSSPEED 230400
 
 #define TAILLE_TRAME 11 //caractères
 
@@ -79,17 +79,19 @@ char trame[ TAILLE_TRAME + 1 ];
 byte cpt = 0;
 void loop(){
     robot.update();
-    sprintf( trame, "%d,%d,3.2,0.0", cpt, 2 );
-    if ( millis() - prevMillis >= 1000 ){
+    sprintf( trame, "%03d,3.2,0.0", cpt, 2 );
+    if ( millis() - prevMillis >= 100 ){
         prevMillis = millis();
         cpt++;
-        if (cpt==10)cpt = 0;
+        // if (cpt==10)cpt = 0;
         Serial.print(F("Now sending : "));
         Serial.print( trame );
         Serial.print( " : taille trame  : "); Serial.print( strlen( trame) );
         Serial.print(" : ");
         if (!radio.write( trame, TAILLE_TRAME )){
             Serial.println(F("failed"));
+        } else {
+            Serial.println();
         }
     }
     
