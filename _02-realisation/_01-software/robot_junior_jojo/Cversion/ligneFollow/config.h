@@ -57,6 +57,7 @@
     
     // #define TLMTXPIN 19
     // #define TLMRXPIN 17
+    #define TIMECYCLEMESU_PIN 19
     
 #else
    

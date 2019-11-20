@@ -11,13 +11,8 @@
 // #include <RH_ASK.h>
 #include <SPI.h> // Not actually used but needed to compile
 #include "robot.h"
-
-
-// #include <SPI.h>
 #include "RF24.h"
 
-//RH_ASK (uint16_t speed=2000, uint8_t rxPin=11, uint8_t txPin=12, uint8_t pttPin=10, bool pttInverted=false)
-// 2000 bits/s <=> 500us/bits <=> 5ms/octet
 #define RSSPEED 230400
 
 #define TAILLE_TRAME 11 //caractères

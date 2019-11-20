@@ -368,6 +368,7 @@ Modules `BLE sur aliExpress`_ à 2.33€ basé sur un CC2541 de TI
 
 .. _`DSD Tech` : http://www.dsdtech-global.com/2019/01/dsdtech-sh-11-ble.html 
 
+======================================
 RPM Mesure
 ======================================
 
@@ -383,6 +384,22 @@ Soit 1 tour 66x2xpimm = 415mm x 109 / 60 soit 753mm/s ou encore 0.753mm/ms
 3.77mm / cycle de 5ms
 
 
+================================
+Mesure de temps de cycle
+================================
+Mesure du temps nécessaire pour exécuter la mise à jour des pwm moteur 
+
+méthode : void CRobotJunior::update()
+
+Branche devJojo_sans_OptiVersionAvecTlmNRF24, commit : 53488c
+
+Temps mesuré à l'oscilloscope 69us (y compris les 2 digitalWrite qui prennet chacun environ 9us)
+
+Plus grâve est le temps de répétition qui vaut une vingtaine de ms très instable.
+
+Refaire la manip sans la partie RF !
+
+======================================
 Batterie pack
 ======================================
 
@@ -390,6 +407,7 @@ Batterie pack
 
 Chargeur de batteries
 
+======================================
 Right angle gears
 ======================================
 `2 pignons 20 dents axe 8mm sur ebay`_ 3.95USD
@@ -436,6 +454,7 @@ Cher mais bien :
 
 .. _`Ensemble d'Engrenage Conique 2:1 (Moyeux de 6mm et 1/4")` :  https://www.robotshop.com/ca/fr/ensemble-engrenage-conique-21-moyeux-6mm-1-4-servocity.html
 
+======================================
 Right angle motors
 ======================================
 Banggood : `GW4058-31ZY - 12V`_ 

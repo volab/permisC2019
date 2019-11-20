@@ -27,7 +27,8 @@ void CRobotJunior::init( unsigned long tempsCycle ){
     _prevMillis = millis();
     
     _tempsCycle = tempsCycle;
-    
+    pinMode( TIMECYCLEMESU_PIN, OUTPUT );
+    digitalWrite( TIMECYCLEMESU_PIN, LOW );
 }
 
 void CRobotJunior::update(){
@@ -36,6 +37,7 @@ void CRobotJunior::update(){
     _liner.forceUpdate();
     _buz.update(); 
     if ( millis() - _prevMillis > _tempsCycle ){
+        digitalWrite( TIMECYCLEMESU_PIN , HIGH ); //to mesure cycle time
         _prevMillis = millis();
         const int constForceTourne = 20;
         int forceTourne;
@@ -86,7 +88,7 @@ void CRobotJunior::update(){
 
             }
         }
-
+        digitalWrite( TIMECYCLEMESU_PIN , LOW );
     }       
 }
 
