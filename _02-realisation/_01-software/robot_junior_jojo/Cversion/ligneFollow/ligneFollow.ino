@@ -15,7 +15,7 @@
 
 #define RSSPEED 230400
 
-#define TAILLE_TRAME 11 //caractères
+// #define TAILLE_TRAME 11 //caractères
 
 CRobotJunior robot;
 // RH_ASK driver(2000, TLMRXPIN, TLMTXPIN, 0); // 19 txpin
@@ -74,21 +74,21 @@ char trame[ TAILLE_TRAME + 1 ];
 byte cpt = 0;
 void loop(){
     robot.update();
-    sprintf( trame, "%03d,3.2,0.0", cpt, 2 );
-    if ( millis() - prevMillis >= 100 ){
-        prevMillis = millis();
-        cpt++;
+    // sprintf( trame, "%03d,3.2,0.0", cpt, 2 );
+    // if ( millis() - prevMillis >= 100 ){
+        // prevMillis = millis();
+        // cpt++;
         // if (cpt==10)cpt = 0;
-        Serial.print(F("Now sending : "));
-        Serial.print( trame );
-        Serial.print( " : taille trame  : "); Serial.print( strlen( trame) );
-        Serial.print(" : ");
-        if (!radio.write( trame, TAILLE_TRAME )){
-            Serial.println(F("failed"));
-        } else {
-            Serial.println();
-        }
-    }
+        // Serial.print(F("Now sending : "));
+        // Serial.print( trame );
+        // Serial.print( " : taille trame  : "); Serial.print( strlen( trame) );
+        // Serial.print(" : ");
+        // if (!radio.write( trame, TAILLE_TRAME )){
+            // Serial.println(F("failed"));
+        // } else {
+            // Serial.println();
+        // }
+    // }
     
     
 

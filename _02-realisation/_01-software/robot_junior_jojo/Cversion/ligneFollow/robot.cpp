@@ -8,6 +8,7 @@
 */
 
 #include "robot.h"
+extern RF24 radio;
 
 void CRobotJunior::init( unsigned long tempsCycle ){
     _initLeds();
@@ -33,7 +34,7 @@ void CRobotJunior::init( unsigned long tempsCycle ){
 
 void CRobotJunior::update(){
     _updateLeds();
-    _updatesSensors();
+    // _updatesSensors();
     _liner.forceUpdate();
     _buz.update(); 
     if ( millis() - _prevMillis > _tempsCycle ){
@@ -88,6 +89,22 @@ void CRobotJunior::update(){
 
             }
         }
+        // char trame[ TAILLE_TRAME + 1 ];
+        _bat = (analogRead(A0)*5.0/1024.0)/.586;
+        _batEnt = int( _bat );
+        _batDec = int( (_bat - _batEnt) *10.0 );
+        sprintf( _trame, "%03d,%d,%d,%d.%d"
+                    , _cpt++
+                    , capteurLigneGauche
+                    , capteurLigneDroite
+                    , _batEnt
+                    , _batDec );
+        // sprintf( _trame, "%03d,%d,%d,3.0"
+                    // , _cpt++
+                    // , capteurLigneGauche
+                    // , capteurLigneDroite );
+        radio.write( _trame, TAILLE_TRAME );
+        
         digitalWrite( TIMECYCLEMESU_PIN , LOW );
     }       
 }

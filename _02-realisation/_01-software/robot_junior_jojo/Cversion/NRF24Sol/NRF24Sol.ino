@@ -17,8 +17,8 @@
 #include <SPI.h>
 #include "RF24.h"
 
-#define PC_COM_SPEED 230400
-#define TAILLE_TRAME 11 //caractères
+#define PC_COM_SPEED 460800
+#define TAILLE_TRAME 14 //caractères
 
 /****************** User Config ***************************/
 /***      Set this radio as radio number 0 or 1         ***/

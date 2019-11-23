@@ -15,6 +15,7 @@
 #include "liner.h"
 #include "buzer.h"
 #include "motor.h"
+#include "RF24.h"
 
 #ifndef _CROBOTJUNIOR_H
 #define _CROBOTJUNIOR_H
@@ -58,6 +59,10 @@ class CRobotJunior{
         void _tourneDroite( int force );
         unsigned long _prevMillis;
         void _stop();
+        char _trame[ TAILLE_TRAME + 1 ];
+        byte _cpt = 0;
+        float _bat;
+        byte _batEnt, _batDec;
         
 	
 };

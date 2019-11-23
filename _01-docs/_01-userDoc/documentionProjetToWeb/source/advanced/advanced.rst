@@ -395,9 +395,17 @@ Branche devJojo_sans_OptiVersionAvecTlmNRF24, commit : 53488c
 
 Temps mesuré à l'oscilloscope 69us (y compris les 2 digitalWrite qui prennet chacun environ 9us)
 
-Plus grâve est le temps de répétition qui vaut une vingtaine de ms très instable.
+Plus grâve est le temps de répétition qui vaut une vingtaine de ms très instable. Cause identifiée :
+les capteurs ultrason et leur timeout à 30ms utilisant la fonction pulse bloquante.
 
-Refaire la manip sans la partie RF !
+une solution élégante serait de fixer le timeout à 2900us soit 50cm.
+
+En désactivant tout, le temps de cyle est à 5ms/+1.4ms : ce jitter de 1.4ms est inexplicable et persiste
+même en aillant désactivé tous les update de la méthode robot.update(). Un début d'explication serait
+dans l'implémentation de la foinction millis elle-même voir sur le `forum ARDUINO`_
+
+.. _`forum ARDUINO` :  : https://forum.arduino.cc/index.php?topic=46351.0
+
 
 ======================================
 Batterie pack
