@@ -93,17 +93,21 @@ void CRobotJunior::update(){
         _bat = (analogRead(A0)*5.0/1024.0)/.586;
         _batEnt = int( _bat );
         _batDec = int( (_bat - _batEnt) *10.0 );
-        sprintf( _trame, "%03d,%d,%d,%d.%d"
-                    , _cpt++
+        unsigned long temps = millis();
+        char c = '*';
+        sprintf( _trame, "%06lu,%d,%d,%d.%d,%c"
+                    , temps
                     , capteurLigneGauche
                     , capteurLigneDroite
                     , _batEnt
-                    , _batDec );
+                    , _batDec
+                    , c );
         // sprintf( _trame, "%03d,%d,%d,3.0"
                     // , _cpt++
                     // , capteurLigneGauche
                     // , capteurLigneDroite );
-        radio.write( _trame, TAILLE_TRAME );
+        // radio.write( _trame, TAILLE_TRAME );
+        Serial.println(_trame);
         
         digitalWrite( TIMECYCLEMESU_PIN , LOW );
     }       
