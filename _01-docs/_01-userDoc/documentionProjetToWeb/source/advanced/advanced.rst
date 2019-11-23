@@ -50,6 +50,13 @@ Test du 23/11/2019 à 18:52
  - Durée du test : 072725 au chrono manuel 1:11:53
  - les 4 points; 08:80, 24:68, 47:97, 1:03:21 (En ms 8800, 24680, 47970, 63210, 71530).
 
+Essais de vitesse : 7.0V 120 ok putty_tx_191123_2131
+
+Remplacement des batterie 
+7.8V(ie 8.4V à vide) KO pour 120
+7.7 90 OK putty_tx_191123_2316.log en 57s
+7.7V vitesse 110 ok 46s
+
 ======================================
 Télémètrie / RF transmissions
 ======================================
@@ -434,6 +441,14 @@ Batterie pack
 
 Chargeur de batteries
 
+`LED bar : Seedstudio`_
+
+
+
+ou 
+
+
+.. _`link_desc` :  http://wiki.seeedstudio.com/Grove-LED_Bar/
 
 =========
 Weblinks

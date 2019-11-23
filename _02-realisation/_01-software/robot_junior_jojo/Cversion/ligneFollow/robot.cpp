@@ -106,8 +106,8 @@ void CRobotJunior::update(){
                     // , _cpt++
                     // , capteurLigneGauche
                     // , capteurLigneDroite );
-        // radio.write( _trame, TAILLE_TRAME );
-        Serial.println(_trame);
+        radio.write( _trame, TAILLE_TRAME );
+        // Serial.println(_trame);
         
         digitalWrite( TIMECYCLEMESU_PIN , LOW );
     }       
