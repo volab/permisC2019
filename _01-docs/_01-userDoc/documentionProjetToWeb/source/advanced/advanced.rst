@@ -75,6 +75,10 @@ Avec batterie full : 13.5s
 avec 90 8.43s fichier non conservé
 avec 110 6.5s Vbat_moy : 7.65V - en charge - mesurées à 8.18V à vide  fichier : putty_tx_191126_2317_3m_110_full.log
 
+V=200 4.6s, VBAT 7.5V
+
+Le reste des résultats est consigné dans le fichier Excel : speeds.xlsx
+
 ======================================
 Télémètrie / RF transmissions
 ======================================

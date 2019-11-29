@@ -8,7 +8,7 @@
 */
 
 #include "robot.h"
-extern RF24 radio;
+extern RF24 radio; //devrait faire partie de la classe a terme !
 
 void CRobotJunior::init( unsigned long tempsCycle ){
     _initLeds();
@@ -31,6 +31,9 @@ void CRobotJunior::init( unsigned long tempsCycle ){
     pinMode( TIMECYCLEMESU_PIN, OUTPUT );
     digitalWrite( TIMECYCLEMESU_PIN, LOW );
     _inRun = false;
+    _lignePerdue = false;
+    _cptPerteLigne = 0;
+    
 }
 
 
@@ -50,6 +53,11 @@ void CRobotJunior::update(){
         // Serial.print( "D = " + String( capteurLigneDroite ) );
         // Serial.println( "\tG = " + String( capteurLigneGauche ) );
         int obstacle = _usCentre.getDistance();
+        if ( _lignePerdue ){
+                _motG.stop();
+                _motD.stop();  
+                for(;;);   
+        }
         if ( obstacle > 0 && obstacle < DISTANCE_ARRET ){
             if (_inRun){ //sinon déjà arrêté
                 _motG.stop();
@@ -70,8 +78,11 @@ void CRobotJunior::update(){
             _motG.avance( _vitesseDeBase );
             _motD.avance( _vitesseDeBase );
             _eteindLed();
+            if ( _cptPerteLigne++ > 100 ) _lignePerdue=true;
+            
 
         } else {
+            _cptPerteLigne = 0;
             forceTourne = constForceTourne;
             if(capteurLigneDroite > 0){
                 if(capteurLigneDroite >= 2 ){
@@ -121,7 +132,8 @@ void CRobotJunior::update(){
                     // , _cpt++
                     // , capteurLigneGauche
                     // , capteurLigneDroite );
-        radio.write( _trame, TAILLE_TRAME );
+        // radio.write( _trame, TAILLE_TRAME );
+        radio.write( _trame, TAILLE_TRAME, 0 ); //noack - enableDynamicAck appelé dans le setup
         // Serial.println(_trame);
         
         digitalWrite( TIMECYCLEMESU_PIN , LOW );

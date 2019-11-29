@@ -56,6 +56,7 @@ void setup(){
     if( radio.setDataRate( RF24_2MBPS ) ) Serial.println("speed is now 2Mbps");
     radio.openWritingPipe(addresses[1]);
     radio.openReadingPipe(1,addresses[0]);
+    radio.enableDynamicAck();
     Serial.print("Je suis le node : ");Serial.println( (char *)addresses[1] );
     if ( !radio.isChipConnected() ){
         Serial.println(" Pb connection ! Aborted.");

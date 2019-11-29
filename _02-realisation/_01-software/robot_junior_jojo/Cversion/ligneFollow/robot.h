@@ -65,6 +65,8 @@ class CRobotJunior{
         byte _batEnt, _batDec;
         bool _inRun;
         void _buzTutTut();
+        bool _lignePerdue;
+        unsigned long _cptPerteLigne;
         
 	
 };
