@@ -55,7 +55,25 @@ Essais de vitesse : 7.0V 120 ok putty_tx_191123_2131
 Remplacement des batterie 
 7.8V(ie 8.4V à vide) KO pour 120
 7.7 90 OK putty_tx_191123_2316.log en 57s
-7.7V vitesse 110 ok 46s
+7.7V vitesse 110 ok 46s putty_tx_191124_0000.log
+
+Temps de cycle à 10ms putty_tx_191124_0008.log
+TC 10ms V 110 BAT 7.7V putty_tx_191124_0017.log US actif refresh every 10ms
+
+Mesure de vitesse
+======================================
+
+Sur une ligne droite de 3m parcours en 7s (vitesse dans le code : 110, tension bat-moyenne: 7.45V)
+3/7 m/s soit 42.85cm/s = 1.54km/h
+Diam roue = 65mm Périmètre = 204mm on tourne à 2.1 tr/s soit environ 126tr/min
+Mesure au tachymetre à vide : 171 RPM
+
+Même essai à 90 (7.42V pour 7.87V à vide) : 3m en 9.4s
+à 70 : 3m en 16.7s
+
+Avec batterie full : 13.5s
+avec 90 8.43s fichier non conservé
+avec 110 6.5s Vbat_moy : 7.65V - en charge - mesurées à 8.18V à vide  fichier : putty_tx_191126_2317_3m_110_full.log
 
 ======================================
 Télémètrie / RF transmissions

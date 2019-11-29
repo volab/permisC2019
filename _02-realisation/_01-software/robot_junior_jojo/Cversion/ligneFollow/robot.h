@@ -63,6 +63,8 @@ class CRobotJunior{
         byte _cpt = 0;
         float _bat;
         byte _batEnt, _batDec;
+        bool _inRun;
+        void _buzTutTut();
         
 	
 };

@@ -29,9 +29,10 @@ void CUsSensor::update(){
         digitalWrite( _trigPin,LOW);
         
         
-        _distance = (int)( pulseIn(_echoPin,HIGH,30000)/58.0 );
+        _distance = (int)( pulseIn(_echoPin,HIGH,2900)/58.0 );
         //distance =  0 on timeout;
         //30.000us <=> 525cm
+        //2900us <=> 50cm
     } 
 }
 

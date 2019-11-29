@@ -12,7 +12,9 @@
 
 #define MAQUETTE_VERSION // comment for PCB version
 
-#define TEMPS_CYCLE 5 //ms
+#define TEMPS_CYCLE 10 //ms
+
+#define DISTANCE_ARRET 30 //cm
 
 #define VITESSE_DE_BASE 110
 

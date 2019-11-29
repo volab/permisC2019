@@ -30,11 +30,13 @@ void CRobotJunior::init( unsigned long tempsCycle ){
     _tempsCycle = tempsCycle;
     pinMode( TIMECYCLEMESU_PIN, OUTPUT );
     digitalWrite( TIMECYCLEMESU_PIN, LOW );
+    _inRun = false;
 }
+
 
 void CRobotJunior::update(){
     _updateLeds();
-    // _updatesSensors();
+    _updatesSensors();
     _liner.forceUpdate();
     _buz.update(); 
     if ( millis() - _prevMillis > _tempsCycle ){
@@ -47,6 +49,18 @@ void CRobotJunior::update(){
         // Serial.println( "Capteur droit = " + String( capteurLigneDroite ) );
         // Serial.print( "D = " + String( capteurLigneDroite ) );
         // Serial.println( "\tG = " + String( capteurLigneGauche ) );
+        int obstacle = _usCentre.getDistance();
+        if ( obstacle > 0 && obstacle < DISTANCE_ARRET ){
+            if (_inRun){ //sinon déjà arrêté
+                _motG.stop();
+                _motD.stop();  
+                _buzTutTut(); //tut tut 
+                _inRun = false;                
+            }
+            return;
+        } else if( !_inRun){
+            _inRun = true;
+        }
         if ( capteurLigneDroite == 7 && capteurLigneGauche == 7 ){ //stop if no ground
             _motG.stop();
             _motD.stop(); 
@@ -95,6 +109,7 @@ void CRobotJunior::update(){
         _batDec = int( (_bat - _batEnt) *10.0 );
         unsigned long temps = millis();
         char c = '*';
+        if ( _usGauche.getDistance() < 20 ){} 
         sprintf( _trame, "%06lu,%d,%d,%d.%d,%c"
                     , temps
                     , capteurLigneGauche
@@ -133,9 +148,9 @@ void CRobotJunior::_initLeds(){
 }
 
 void CRobotJunior::_initSensors(){
-    _usGauche.begin( US_SENSOR_GAUCHE_TRIG_PIN, US_SENSOR_GAUCHE_ECHO_PIN );
-    _usCentre.begin( US_SENSOR_CENTRE_TRIG_PIN, US_SENSOR_CENTRE_ECHO_PIN );
-    _usDroite.begin( US_SENSOR_DROITE_TRIG_PIN, US_SENSOR_DROITE_ECHO_PIN );
+    _usGauche.begin( US_SENSOR_GAUCHE_TRIG_PIN, US_SENSOR_GAUCHE_ECHO_PIN, TEMPS_CYCLE );
+    _usCentre.begin( US_SENSOR_CENTRE_TRIG_PIN, US_SENSOR_CENTRE_ECHO_PIN, TEMPS_CYCLE );
+    _usDroite.begin( US_SENSOR_DROITE_TRIG_PIN, US_SENSOR_DROITE_ECHO_PIN, TEMPS_CYCLE );
     _irGauche.begin( IR_SENSOR_GAUCHE_PIN );
     _irCentre.begin( IR_SENSOR_CENTRE_PIN );
     _irDroite.begin( IR_SENSOR_DROITE_PIN );    
@@ -205,4 +220,12 @@ void CRobotJunior::_tourneGauche( int force ){
 void CRobotJunior::_tourneDroite( int force ){
     _motD.avance( _vitesseDeBase - force );
     _motG.avance( _vitesseDeBase + force );    
+}
+
+void CRobotJunior::_buzTutTut(){
+
+    _buz.setPeriod( 50 );
+    _buz.setFreq(800);
+    _buz.setDuration( 100 );
+    _buz.setCount( 2 );
 }
