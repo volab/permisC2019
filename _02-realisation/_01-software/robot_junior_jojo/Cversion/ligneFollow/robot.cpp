@@ -33,7 +33,8 @@ void CRobotJunior::init( unsigned long tempsCycle ){
     _inRun = false;
     _lignePerdue = false;
     _cptPerteLigne = 0;
-    
+    _etat = FOLLOWLIGNE;
+    _detectTagOn = false;
 }
 
 
@@ -45,18 +46,65 @@ void CRobotJunior::update(){
     if ( millis() - _prevMillis > _tempsCycle ){
         digitalWrite( TIMECYCLEMESU_PIN , HIGH ); //to mesure cycle time
         _prevMillis = millis();
-        const int constForceTourne = 20;
-        int forceTourne;
         byte capteurLigneDroite = _liner.getValueDroite();
         byte capteurLigneGauche = _liner.getValueGauche();
+        _followTheLigne( capteurLigneGauche, capteurLigneDroite );
+        if ( capteurLigneDroite == 7 && capteurLigneGauche == 7 ) return; //pour arrêter les acquisitions
+
+        // char trame[ TAILLE_TRAME + 1 ];
+        _bat = (analogRead(A0)*5.0/1024.0)/.586;
+        _batEnt = int( _bat );
+        _batDec = int( (_bat - _batEnt) *10.0 );
+        unsigned long temps = millis();
+        char c = '*';
+        int tagDist = _usGauche.getDistance();
+        
+        if ( tagDist > 0 && tagDist < 20 ){
+            if ( !_detectTagOn ){
+                c = __tableTag[ _cptTag];
+                if ( ++_cptTag >= NBR_TAG ) _cptTag=0;
+                 _ledCapteurGauche.onFlash(300);
+                 // _ledCapteurGauche.on();
+                 _detectTagOn = true;                
+            }
+        } else _detectTagOn = false; // mieux vaudrait un compteur pourinterdire les réarmements
+        //intempestifs
+        sprintf( _trame, "%06lu,%d,%d,%d.%d,%c"
+                    , temps
+                    , capteurLigneGauche
+                    , capteurLigneDroite
+                    , _batEnt
+                    , _batDec
+                    , c );
+        // sprintf( _trame, "%03d,%d,%d,3.0"
+                    // , _cpt++
+                    // , capteurLigneGauche
+                    // , capteurLigneDroite );
+        // radio.write( _trame, TAILLE_TRAME );
+        radio.write( _trame, TAILLE_TRAME, 0 ); //noack - enableDynamicAck appelé dans le setup
+        // Serial.println(_trame);
+        
+        digitalWrite( TIMECYCLEMESU_PIN , LOW );
+    }       
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//                        Méthodes privées                                                        //
+////////////////////////////////////////////////////////////////////////////////////////////////////
+void CRobotJunior::_followTheLigne( byte capteurLigneGauche, byte capteurLigneDroite){
+        const int constForceTourne = 20;
+        int forceTourne;
+
         // Serial.println( "Capteur droit = " + String( capteurLigneDroite ) );
         // Serial.print( "D = " + String( capteurLigneDroite ) );
         // Serial.println( "\tG = " + String( capteurLigneGauche ) );
         int obstacle = _usCentre.getDistance();
+        
         if ( _lignePerdue ){
                 _motG.stop();
                 _motD.stop();  
-                for(;;);   
+                // for(;;);   
         }
         if ( obstacle > 0 && obstacle < DISTANCE_ARRET ){
             if (_inRun){ //sinon déjà arrêté
@@ -113,38 +161,8 @@ void CRobotJunior::update(){
                 _allumLedGauche();
 
             }
-        }
-        // char trame[ TAILLE_TRAME + 1 ];
-        _bat = (analogRead(A0)*5.0/1024.0)/.586;
-        _batEnt = int( _bat );
-        _batDec = int( (_bat - _batEnt) *10.0 );
-        unsigned long temps = millis();
-        char c = '*';
-        if ( _usGauche.getDistance() < 20 ){} 
-        sprintf( _trame, "%06lu,%d,%d,%d.%d,%c"
-                    , temps
-                    , capteurLigneGauche
-                    , capteurLigneDroite
-                    , _batEnt
-                    , _batDec
-                    , c );
-        // sprintf( _trame, "%03d,%d,%d,3.0"
-                    // , _cpt++
-                    // , capteurLigneGauche
-                    // , capteurLigneDroite );
-        // radio.write( _trame, TAILLE_TRAME );
-        radio.write( _trame, TAILLE_TRAME, 0 ); //noack - enableDynamicAck appelé dans le setup
-        // Serial.println(_trame);
-        
-        digitalWrite( TIMECYCLEMESU_PIN , LOW );
-    }       
+        }     
 }
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-//                        Méthodes privées                                                        //
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 void CRobotJunior::_initLeds(){
     _ledAvantGauche.begin( LED_AVANT_GAUCHE_PIN , 100, 500 );
@@ -154,9 +172,9 @@ void CRobotJunior::_initLeds(){
     _ledCapteurGauche.begin( LED_SENSOR_GAUCHE_PIN );
     _ledCapteurCentre.begin( LED_SENSOR_CENTRE_PIN );
     _ledCapteurDroite.begin( LED_SENSOR_DROITE_PIN );
-    _ledCapteurGauche.on();
-    _ledCapteurCentre.on();  
-    _ledCapteurDroite.on();    
+    _ledCapteurGauche.off();
+    _ledCapteurCentre.off();  
+    _ledCapteurDroite.off();    
 }
 
 void CRobotJunior::_initSensors(){

@@ -388,7 +388,7 @@ Dispo `XBEE chez MOUSER`_ à 18€ sans antenne sachant qu'il en faut au moins 2
 
 Préférer les modules en 2.4GHz à mon avis (pifométrique)
 
-LORA
+LORA un bon `exemple sur Hacksterio`_
 
 BLE4.0
 
@@ -404,6 +404,9 @@ Modules `BLE sur aliExpress`_ à 2.33€ basé sur un CC2541 de TI
 
 
 .. _`XBEE chez MOUSER` : https://www.mouser.fr/ProductDetail/Digi-International/XB3-24Z8PT-J?qs=sGAEpiMZZMve4%2FbfQkoj%252BHnv3ft0YYh1ZelV1uOq7SE%3D
+
+.. _`exemple sur Hacksterio` : https://www.hackster.io/xreef/lora-e32-device-for-arduino-esp32-or-esp8266-library-728a86
+
 
 .. _`BLE sur AMAZON` : https://www.amazon.com/DSD-TECH-Bluetooth-iBeacon-Arduino/dp/B06WGZB2N4/ref=sr_1_10?keywords=BLE&qid=1573809341&s=electronics&sr=1-10
 

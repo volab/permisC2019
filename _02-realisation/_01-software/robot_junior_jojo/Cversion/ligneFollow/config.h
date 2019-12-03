@@ -16,7 +16,8 @@
 
 #define DISTANCE_ARRET 30 //cm
 
-#define VITESSE_DE_BASE 100
+#define VITESSE_DE_BASE 115
+
 
 #define LED_AVANT_GAUCHE_PIN 27
 #define LED_AVANT_DROITE_PIN 5

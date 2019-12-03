@@ -20,7 +20,7 @@
 #ifndef _CROBOTJUNIOR_H
 #define _CROBOTJUNIOR_H
 
-
+#define NBR_TAG 5
 /**
 * @class CRobotJunior robot.h
 * @brief Classe qui prend en charge tout les comportement du robot Junior du VoLAB
@@ -30,7 +30,12 @@ class CRobotJunior{
         void init( unsigned long tempsCycle );
         void update();
         
+        enum { FOLLOWLIGNE, LIGNELOST };
+        
     private:
+        // const int __nbrTag = 5;
+        char __tableTag[NBR_TAG]={'A', 'B', 'C', 'D', 'E'};
+        unsigned int _cptTag;
         Flasher _ledAvantGauche, _ledAvantDroite;
         Flasher _ledCapteurGauche, _ledCapteurCentre, _ledCapteurDroite;
         Flasher _ledArriereGauche, _ledArriereDroite;
@@ -66,7 +71,10 @@ class CRobotJunior{
         bool _inRun;
         void _buzTutTut();
         bool _lignePerdue;
-        unsigned long _cptPerteLigne;
+        unsigned int _cptPerteLigne;
+        unsigned int _etat;
+        void _followTheLigne( byte capteurLigneGauche, byte capteurLigneDroite);
+        bool _detectTagOn;
         
 	
 };

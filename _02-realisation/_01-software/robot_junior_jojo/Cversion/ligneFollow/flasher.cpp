@@ -32,14 +32,31 @@ void Flasher::begin( int pin, unsigned long ton, unsigned long toff){
     digitalWrite( _pin, _ledState );
     _allwaysOn = false;
     _running = true;
+    _repeat  = 0;
     
 }
+
+ void Flasher::onFlash( unsigned long ton ){
+    _ton = ton;
+    _toff = ton;
+    _running = true;
+    _repeat = 1;
+    _repeatCount = 0;
+    _ledState = 0;
+    _previousMillis = 0;
+    _changeStateCpt = 0;
+    digitalWrite( _pin, _ledState );
+    _allwaysOn = false;
+    // Serial.println( "detection ");
+     
+ }
 
 void Flasher::on(){ 
     digitalWrite( _pin, HIGH );
     _running = false;
     _allwaysOn = true;
     _ledState = true;
+    // Serial.println("flasheron");
 }
 
 void Flasher::off(){ 
@@ -65,19 +82,79 @@ void Flasher::update(){
         return;   
     } else {
         if ( _running ){
-            if ( (millis()-_previousMillis  > _ton) && (_ledState == 1) ){
-                _ledState = 0;
-                _previousMillis = millis();
-                digitalWrite( _pin, _ledState );
-                _changeStateCpt++;
-            } else if ( (millis()-_previousMillis  > _toff) && (_ledState == 0) ){
-                _ledState = 1 ;
-                _previousMillis = millis();
-                digitalWrite( _pin, _ledState );
-                _changeStateCpt++;
-            }  
+            if ( _repeat ){
+                if ( _repeatCount < _repeat ){
+                    if ( (millis()-_previousMillis  > _ton) && (_ledState == 1) ){
+                        _ledState = 0;
+                        _previousMillis = millis();
+                        digitalWrite( _pin, _ledState );
+                        _changeStateCpt++;
+                        _repeatCount++;
+                    } else if ( (millis()-_previousMillis  > _toff) && (_ledState == 0) ){
+                        _ledState = 1 ;
+                        _previousMillis = millis();
+                        digitalWrite( _pin, _ledState );
+                        _changeStateCpt++; 
+                        // _repeatCount++;                        
+                    }
+                } else { _running = false; }
+            } else { // normal mode
+                if ( (millis()-_previousMillis  > _ton) && (_ledState == 1) ){
+                    _ledState = 0;
+                    _previousMillis = millis();
+                    digitalWrite( _pin, _ledState );
+                    _changeStateCpt++;
+                } else if ( (millis()-_previousMillis  > _toff) && (_ledState == 0) ){
+                    _ledState = 1 ;
+                    _previousMillis = millis();
+                    digitalWrite( _pin, _ledState );
+                    _changeStateCpt++;
+                }  
+  
+            }
         }
     }
+    
+    // if ( _flashingMode ){
+        // if ( _repeat ){ //repeat mode
+            // if ( _repeatCount < _repeat ){
+                // if ( (millis()-_previousMillis  > _ton) && (_ledState == _onLevel) ){
+                    // _ledState = _offLevel;
+                    // _previousMillis = millis();
+                    // _ioexp.digitalWrite( _pin, _ledState );
+                    // _changeStateCpt++;
+                    // _repeatCount++;
+                // } else if ( (millis()-_previousMillis  > _toff) && (_ledState == _offLevel) ){
+                    // _ledState = _onLevel ;       
+                    // _previousMillis = millis();
+                    // _ioexp.digitalWrite( _pin, _ledState );
+                    // _changeStateCpt++; 
+                // } 
+            // } else if ( millis()-_previousPeriod > _period ){
+                // _previousPeriod = millis();
+                // _repeatCount = 0;
+                // _previousMillis = millis();
+            // }
+            
+        // } else { //normal mode
+            // if ( (millis()-_previousMillis  > _ton) && (_ledState == _onLevel) ){
+                // _ledState = _offLevel;
+                // _previousMillis = millis();
+                // _ioexp.digitalWrite( _pin, _ledState );
+                // _changeStateCpt++;
+            // } else if ( (millis()-_previousMillis  > _toff) && (_ledState == _offLevel) ){
+                // _ledState = _onLevel ;       
+                // _previousMillis = millis();
+                // _ioexp.digitalWrite( _pin, _ledState );
+                // _changeStateCpt++;
+            // }    
+        // }      
+    // }    
+    
+    
+    
+    
+    
 }
 /** 
 @fn void Flasher::stop()

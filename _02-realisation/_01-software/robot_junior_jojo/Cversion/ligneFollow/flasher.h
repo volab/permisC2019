@@ -41,6 +41,7 @@ class Flasher {
         void stop();
         Flasher(){};
         void begin( int pin, unsigned long ton = 0, unsigned long toff = 0 );
+        void onFlash( unsigned long ton );
         void update();
         int getChangeStateCpt(){ return _changeStateCpt; }/**< @brief to stop flashing after a certain number of times*/
         void allwaysOn(){_allwaysOn = true;}
@@ -56,6 +57,8 @@ class Flasher {
         unsigned long _changeStateCpt;
         bool _allwaysOn = false;
         bool _running = false;
+        unsigned int _repeat;
+        unsigned int _repeatCount;
     
 };
 
