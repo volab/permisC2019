@@ -60,14 +60,18 @@ void CRobotJunior::update(){
         int tagDist = _usGauche.getDistance();
         
         if ( tagDist > 0 && tagDist < 20 ){
-            if ( !_detectTagOn ){
-                c = __tableTag[ _cptTag];
+            if ( _detectTagOn == 0 ){
+                // c = __tableTag[ _cptTag];
+                c = 'T'; //T for TAG unique char to find in the file it is more easy
                 if ( ++_cptTag >= NBR_TAG ) _cptTag=0;
                  _ledCapteurGauche.onFlash(300);
                  // _ledCapteurGauche.on();
-                 _detectTagOn = true;                
+                 _detectTagOn = 100; //100 cycles soit 1000ms   avec un cycle de 10ms  
+                // soit environ 40cm à 0.47 m/s VBAT 7V  Vconsigne 110                 
             }
-        } else _detectTagOn = false; // mieux vaudrait un compteur pourinterdire les réarmements
+        }
+        if ( _detectTagOn != 0) _detectTagOn--;
+        // } else _detectTagOn = 0; // mieux vaudrait un compteur pourinterdire les réarmements
         //intempestifs
         sprintf( _trame, "%06lu,%d,%d,%d.%d,%c"
                     , temps
@@ -104,7 +108,7 @@ void CRobotJunior::_followTheLigne( byte capteurLigneGauche, byte capteurLigneDr
         if ( _lignePerdue ){
                 _motG.stop();
                 _motD.stop();  
-                // for(;;);   
+                for(;;);   
         }
         if ( obstacle > 0 && obstacle < DISTANCE_ARRET ){
             if (_inRun){ //sinon déjà arrêté

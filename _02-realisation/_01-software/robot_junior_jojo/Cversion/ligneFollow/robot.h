@@ -74,7 +74,7 @@ class CRobotJunior{
         unsigned int _cptPerteLigne;
         unsigned int _etat;
         void _followTheLigne( byte capteurLigneGauche, byte capteurLigneDroite);
-        bool _detectTagOn;
+        unsigned int _detectTagOn;
         
 	
 };
