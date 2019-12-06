@@ -33,9 +33,7 @@ class CRobotJunior{
         enum { FOLLOWLIGNE, LIGNELOST };
         
     private:
-        // const int __nbrTag = 5;
-        char __tableTag[NBR_TAG]={'A', 'B', 'C', 'D', 'E'};
-        unsigned int _cptTag;
+
         Flasher _ledAvantGauche, _ledAvantDroite;
         Flasher _ledCapteurGauche, _ledCapteurCentre, _ledCapteurDroite;
         Flasher _ledArriereGauche, _ledArriereDroite;
@@ -75,6 +73,7 @@ class CRobotJunior{
         unsigned int _etat;
         void _followTheLigne( byte capteurLigneGauche, byte capteurLigneDroite);
         unsigned int _detectTagOn;
+        int _etatRobot;
         
 	
 };

@@ -35,6 +35,7 @@ void CRobotJunior::init( unsigned long tempsCycle ){
     _cptPerteLigne = 0;
     _etat = FOLLOWLIGNE;
     _detectTagOn = false;
+    _etatRobot = FOLLOWLIGNE;
 }
 
 
@@ -48,7 +49,28 @@ void CRobotJunior::update(){
         _prevMillis = millis();
         byte capteurLigneDroite = _liner.getValueDroite();
         byte capteurLigneGauche = _liner.getValueGauche();
-        _followTheLigne( capteurLigneGauche, capteurLigneDroite );
+        switch ( _etatRobot ){
+            case FOLLOWLIGNE:
+                _followTheLigne( capteurLigneGauche, capteurLigneDroite );
+                if ( _lignePerdue ) _etatRobot = LIGNELOST;
+                break;
+            case LIGNELOST:
+                _motG.stop();
+                _motD.stop();  
+                for(;;){
+                    _allumLedGauche();
+                    delay(500);
+                    _eteindLed();
+                    delay(500);
+                    _allumeLedDroite();
+                    delay(500);
+                    _eteindLed();
+                    delay(500);
+                }
+                break;
+
+        }        
+        
         if ( capteurLigneDroite == 7 && capteurLigneGauche == 7 ) return; //pour arrêter les acquisitions
 
         // char trame[ TAILLE_TRAME + 1 ];
@@ -61,18 +83,13 @@ void CRobotJunior::update(){
         
         if ( tagDist > 0 && tagDist < 20 ){
             if ( _detectTagOn == 0 ){
-                // c = __tableTag[ _cptTag];
                 c = 'T'; //T for TAG unique char to find in the file it is more easy
-                if ( ++_cptTag >= NBR_TAG ) _cptTag=0;
-                 _ledCapteurGauche.onFlash(300);
-                 // _ledCapteurGauche.on();
-                 _detectTagOn = 100; //100 cycles soit 1000ms   avec un cycle de 10ms  
+                _ledCapteurGauche.onFlash(300);
+                _detectTagOn = 100; //100 cycles soit 1000ms   avec un cycle de 10ms  
                 // soit environ 40cm à 0.47 m/s VBAT 7V  Vconsigne 110                 
             }
         }
         if ( _detectTagOn != 0) _detectTagOn--;
-        // } else _detectTagOn = 0; // mieux vaudrait un compteur pourinterdire les réarmements
-        //intempestifs
         sprintf( _trame, "%06lu,%d,%d,%d.%d,%c"
                     , temps
                     , capteurLigneGauche
@@ -80,15 +97,9 @@ void CRobotJunior::update(){
                     , _batEnt
                     , _batDec
                     , c );
-        // sprintf( _trame, "%03d,%d,%d,3.0"
-                    // , _cpt++
-                    // , capteurLigneGauche
-                    // , capteurLigneDroite );
-        // radio.write( _trame, TAILLE_TRAME );
         radio.write( _trame, TAILLE_TRAME, 0 ); //noack - enableDynamicAck appelé dans le setup
-        // Serial.println(_trame);
         
-        digitalWrite( TIMECYCLEMESU_PIN , LOW );
+        digitalWrite( TIMECYCLEMESU_PIN , LOW ); //mesure temps de cycle
     }       
 }
 
@@ -105,11 +116,11 @@ void CRobotJunior::_followTheLigne( byte capteurLigneGauche, byte capteurLigneDr
         // Serial.println( "\tG = " + String( capteurLigneGauche ) );
         int obstacle = _usCentre.getDistance();
         
-        if ( _lignePerdue ){
-                _motG.stop();
-                _motD.stop();  
-                for(;;);   
-        }
+        // if ( _lignePerdue ){
+                // _motG.stop();
+                // _motD.stop();  
+                // for(;;);   
+        // }
         if ( obstacle > 0 && obstacle < DISTANCE_ARRET ){
             if (_inRun){ //sinon déjà arrêté
                 _motG.stop();
@@ -139,31 +150,25 @@ void CRobotJunior::_followTheLigne( byte capteurLigneGauche, byte capteurLigneDr
             if(capteurLigneDroite > 0){
                 if(capteurLigneDroite >= 2 ){
                     forceTourne = forceTourne * 2;
-
                 }
                 if(capteurLigneDroite >= 4 ){
                     forceTourne = forceTourne * 2;
-
                 }
                 // Serial.println("forceTourne droite = " + String( forceTourne ) );
                 _tourneDroite(forceTourne);
                 _allumeLedDroite();
-
             }
             if(capteurLigneGauche > 0){
                 forceTourne = constForceTourne;
                 if(capteurLigneGauche >= 2 ){
-                            forceTourne = forceTourne * 2;
-
+                    forceTourne = forceTourne * 2;
                 }
                 if(capteurLigneGauche >= 4 ){
                     forceTourne = forceTourne * 2;
-
                 }
                 // Serial.println("forceTourne gauche = " + String( forceTourne ) );
                 _tourneGauche(forceTourne);
                 _allumLedGauche();
-
             }
         }     
 }
