@@ -79,6 +79,26 @@ V=200 4.6s, VBAT 7.5V
 
 Le reste des résultats est consigné dans le fichier Excel : speeds.xlsx
 
+En couclusion on est à environ 110tr/min
+
+Calcul du demi tour
+======================================
+
+Diametre de roue 65mm, soit un périmètre de 204mm.
+
+Vitesse 120tr/min (Vbat 7.2V consigne 115) soit 2tr/s soit encore 0.02tr/cycle de 10ms.
+
+Ce qui nous donne un déplacement de'environ 4mm/cycle (204*0.02).
+
+Pour faire un demi tour en bloquant une roue, il faut parcourir un demi périmètre du cercle décrit
+par une roue (entraxe des roues 110mm).
+
+Distance à parcourir pixD/2 soit encore pi*R soit 346mm à raison de 4mm/cycle, il faut 86.5 cycles.
+
+Résultat expérimental : avec 90 cycles on a seulement un bon tiers de tour.
+
+Explication : au démarrage de la rotation la roue en rotation "broute".
+
 ======================================
 Télémètrie / RF transmissions
 ======================================
