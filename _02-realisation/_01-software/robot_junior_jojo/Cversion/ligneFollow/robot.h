@@ -93,6 +93,9 @@ class CRobotJunior{
         
         unsigned int _cptRecul; /**< @brief permet de régler la distance de recule */
         byte _cptRetrieveLigne;
+        
+        unsigned int _cptTour;
+        unsigned int _vitesGaucheRetrive;
 	
 };
 

@@ -99,6 +99,11 @@ Résultat expérimental : avec 90 cycles on a seulement un bon tiers de tour.
 
 Explication : au démarrage de la rotation la roue en rotation "broute".
 
+Par expérimentation (branche cpUnTour) on arrive à environ 120 cycles pour un demi-tour.
+
+En activant les 2 roues une en avant et l'autre en arrière la valeur serait de 55, le mouvement est 
+alors plus agréable.
+
 ======================================
 Télémètrie / RF transmissions
 ======================================

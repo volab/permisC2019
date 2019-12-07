@@ -75,6 +75,8 @@ void CRobotJunior::update(){
                     _motG.recule( _vitesseDeBase );
                     _cptRecul--;
                 } else {
+                    _cptTour = 0;
+                    _vitesGaucheRetrive = 0;
                     _etatRobot = RETRIVELIGN;
                 }
                 break;
@@ -194,7 +196,13 @@ void CRobotJunior::_followTheLigne( byte capteurLigneGauche, byte capteurLigneDr
 
 bool CRobotJunior::_retriveLigne(){
     _motD.avance( _vitesseDeBase );
-    _motG.stop();
+    _motG.avance( _vitesGaucheRetrive );
+    _cptTour++;
+    if( _cptTour >= 240 ){
+        _cptTour = 0;
+        if (_vitesGaucheRetrive == 0) _vitesGaucheRetrive = 70;
+        else _vitesGaucheRetrive +=20;
+    }
     byte capteurLigneDroite = _liner.getValueDroite();
     byte capteurLigneGauche = _liner.getValueGauche();
     //_cptRetrieveLigne pour éviter les fausses détections
