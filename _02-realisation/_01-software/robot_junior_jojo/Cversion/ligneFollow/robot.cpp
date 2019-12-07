@@ -52,23 +52,47 @@ void CRobotJunior::update(){
         switch ( _etatRobot ){
             case FOLLOWLIGNE:
                 _followTheLigne( capteurLigneGauche, capteurLigneDroite );
-                if ( _lignePerdue ) _etatRobot = LIGNELOST;
+                if ( _lignePerdue ){
+                   _buz.ligneLostSound();
+                  _etatRobot = LIGNELOST;  
+                } 
                 break;
             case LIGNELOST:
                 _motG.stop();
-                _motD.stop();  
-                for(;;){
-                    _allumLedGauche();
-                    delay(500);
-                    _eteindLed();
-                    delay(500);
-                    _allumeLedDroite();
-                    delay(500);
-                    _eteindLed();
-                    delay(500);
+                _motD.stop(); 
+                _cptPause = 300;
+                _etatRobot = PAUSE;
+                break;
+            case PAUSE:
+                if ( !_cptPause-- ){
+                    _cptRecul = CPT_LIG_LOST_MAX+CPT_LIG_LOST_MAX/2;
+                    _etatRobot = RECULE;
+                } 
+                break;
+            case RECULE:
+                if ( _cptRecul != 0){
+                    _motD.recule( _vitesseDeBase );
+                    _motG.recule( _vitesseDeBase );
+                    _cptRecul--;
+                } else {
+                    _etatRobot = RETRIVELIGN;
                 }
                 break;
-
+            case RETRIVELIGN:
+                if ( _retriveLigne() ){
+                    _motG.stop();
+                    _motD.stop(); 
+                    _etatRobot = END;
+                }
+                break;
+            case END:
+                for(;;){
+                    _allumeDroiteGauche();
+                    delay(200);
+                    _eteindLed();
+                    delay(200);
+                }  
+                break;
         }        
         
         if ( capteurLigneDroite == 7 && capteurLigneGauche == 7 ) return; //pour arrêter les acquisitions
@@ -89,6 +113,8 @@ void CRobotJunior::update(){
                 // soit environ 40cm à 0.47 m/s VBAT 7V  Vconsigne 110                 
             }
         }
+        if (_etatRobot == RECULE) c='R';
+        if (_etatRobot == RETRIVELIGN) c='C';
         if ( _detectTagOn != 0) _detectTagOn--;
         sprintf( _trame, "%06lu,%d,%d,%d.%d,%c"
                     , temps
@@ -116,16 +142,11 @@ void CRobotJunior::_followTheLigne( byte capteurLigneGauche, byte capteurLigneDr
         // Serial.println( "\tG = " + String( capteurLigneGauche ) );
         int obstacle = _usCentre.getDistance();
         
-        // if ( _lignePerdue ){
-                // _motG.stop();
-                // _motD.stop();  
-                // for(;;);   
-        // }
         if ( obstacle > 0 && obstacle < DISTANCE_ARRET ){
             if (_inRun){ //sinon déjà arrêté
                 _motG.stop();
                 _motD.stop();  
-                _buzTutTut(); //tut tut 
+                _buz.tutut(); //tut tut 
                 _inRun = false;                
             }
             return;
@@ -141,9 +162,7 @@ void CRobotJunior::_followTheLigne( byte capteurLigneGauche, byte capteurLigneDr
             _motG.avance( _vitesseDeBase );
             _motD.avance( _vitesseDeBase );
             _eteindLed();
-            if ( _cptPerteLigne++ > 100 ) _lignePerdue=true;
-            
-
+            if ( _cptPerteLigne++ > CPT_LIG_LOST_MAX ) _lignePerdue=true;
         } else {
             _cptPerteLigne = 0;
             forceTourne = constForceTourne;
@@ -172,6 +191,21 @@ void CRobotJunior::_followTheLigne( byte capteurLigneGauche, byte capteurLigneDr
             }
         }     
 }
+
+bool CRobotJunior::_retriveLigne(){
+    _motD.avance( _vitesseDeBase );
+    _motG.stop();
+    byte capteurLigneDroite = _liner.getValueDroite();
+    byte capteurLigneGauche = _liner.getValueGauche();
+    //_cptRetrieveLigne pour éviter les fausses détections
+    if ( capteurLigneDroite != 0 || capteurLigneGauche !=0 ) _cptRetrieveLigne++;
+    else _cptRetrieveLigne = 0;
+    if ( _cptRetrieveLigne >= 5 ) return true;
+    return false;
+
+}
+
+
 
 void CRobotJunior::_initLeds(){
     _ledAvantGauche.begin( LED_AVANT_GAUCHE_PIN , 100, 500 );
@@ -244,6 +278,14 @@ void CRobotJunior::_allumeLedDroite(){
     _ledArriereGauche.off();    
 }
 
+void CRobotJunior::_allumeDroiteGauche(){
+    _ledAvantDroite.on();
+    _ledArriereDroite.on();
+    _ledAvantGauche.on();
+    _ledArriereGauche.on();
+}
+
+
 void CRobotJunior::_eteindLed(){
     _ledAvantDroite.off();
     _ledAvantGauche.off();
@@ -261,10 +303,10 @@ void CRobotJunior::_tourneDroite( int force ){
     _motG.avance( _vitesseDeBase + force );    
 }
 
-void CRobotJunior::_buzTutTut(){
+// void CRobotJunior::_buzTutTut(){
 
-    _buz.setPeriod( 50 );
-    _buz.setFreq(800);
-    _buz.setDuration( 100 );
-    _buz.setCount( 2 );
-}
+    // _buz.setPeriod( 50 );
+    // _buz.setFreq(800);
+    // _buz.setDuration( 100 );
+    // _buz.setCount( 2 );
+// }

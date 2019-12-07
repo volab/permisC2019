@@ -21,15 +21,17 @@ class CBuzzer{
         void setFreq( unsigned int freq){ _freq = freq; }
         void setDuration( unsigned long duree ){ _duree = duree; }
         void setCount( unsigned int count ){ _cpt = _count = count; };
+        void tutut();
+        void ligneLostSound();
 	
     
     private:
         int _pin;
         unsigned int _freq;
-        unsigned long _duree;
-        unsigned long _period;
+        unsigned long _duree; /**< @brief duree de la note */
+        unsigned long _period;/**< @brief dure+period = periode de répétition */
         unsigned long _prev_millis;
-        unsigned int _count;
+        unsigned int _count;/**< @brief count = 0 <=> continuus */
         unsigned int _cpt;
     
     

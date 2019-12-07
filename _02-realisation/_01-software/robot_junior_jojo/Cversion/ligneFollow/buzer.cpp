@@ -15,7 +15,7 @@ void CBuzzer::begin( int pin, unsigned int freq, unsigned long duree, unsigned l
     _duree = duree;
     _period = period;
     _prev_millis = millis();
-    _count = 0; /**< @brief count = 0 <=> continuus */
+    _count = 0; 
 }
 
 void CBuzzer::update(){
@@ -31,4 +31,19 @@ void CBuzzer::update(){
         }
             
     }
+}
+
+
+void CBuzzer::tutut(){
+    setPeriod( 50 );
+    setFreq(800);
+    setDuration( 100 );
+    setCount( 2 );    
+}
+
+void CBuzzer::ligneLostSound(){
+    setPeriod( 300 );
+    setFreq(400);
+    setDuration( 300 );
+    setCount( 4 );      
 }

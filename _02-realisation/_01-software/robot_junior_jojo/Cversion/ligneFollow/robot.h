@@ -30,7 +30,7 @@ class CRobotJunior{
         void init( unsigned long tempsCycle );
         void update();
         
-        enum { FOLLOWLIGNE, LIGNELOST };
+        enum { FOLLOWLIGNE, LIGNELOST, PAUSE, END, RETRIVELIGN, RECULE, CONFIRME };
         
     private:
 
@@ -47,8 +47,9 @@ class CRobotJunior{
         CBuzzer _buz;
 
         CDCMotor _motG, _motD;
-        unsigned int _vitesseDeBase = VITESSE_DE_BASE ;
-        unsigned long _tempsCycle;
+
+        
+        //Methodes privées
         void _initLeds();
         void _initSensors();
         void _initBuzzer();
@@ -57,24 +58,41 @@ class CRobotJunior{
         void _updatesSensors();
         void _allumLedGauche();
         void _allumeLedDroite();
+        void _allumeDroiteGauche();
         void _eteindLed();
         void _tourneGauche( int force );
         void _tourneDroite( int force );
-        unsigned long _prevMillis;
+        
         void _stop();
-        char _trame[ TAILLE_TRAME + 1 ];
-        byte _cpt = 0;
+        void _followTheLigne( byte capteurLigneGauche, byte capteurLigneDroite);
+        bool _retriveLigne();
+        
+        char _trame[ TAILLE_TRAME + 1 ];/**< @brief trame NRF24 */
+        
+        
+    
+        
+        //Attributs privés
+        unsigned int _vitesseDeBase = VITESSE_DE_BASE ;
+        unsigned long _tempsCycle;          
+        unsigned long _prevMillis;
+        byte _cpt = 0; /**< @brief Usage ? */
+        
         float _bat;
         byte _batEnt, _batDec;
         bool _inRun;
-        void _buzTutTut();
+        // void _buzTutTut();
         bool _lignePerdue;
-        unsigned int _cptPerteLigne;
+        unsigned int _cptPerteLigne; /**< @brief utilisé dans la détection de perte de la ligne */
         unsigned int _etat;
-        void _followTheLigne( byte capteurLigneGauche, byte capteurLigneDroite);
+        
         unsigned int _detectTagOn;
         int _etatRobot;
+        unsigned long _cptPause; /**< @brief permet de faire une pause dans la machine d'état */
         
+        
+        unsigned int _cptRecul; /**< @brief permet de régler la distance de recule */
+        byte _cptRetrieveLigne;
 	
 };
 
