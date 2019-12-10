@@ -6,6 +6,10 @@ Advanced stuf for robot Junior
 Suiveur de ligne
 ======================================
 
+`Projet très ressemblant sur Hackster.io`_
+
+.. _`Projet très ressemblant sur Hackster.io` : https://www.hackster.io/cytron-technologies/building-a-low-cost-line-following-robot-c4a32e
+
 3 capteurs IR de chaque côté
 
 

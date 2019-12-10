@@ -30,7 +30,7 @@ class CRobotJunior{
         void init( unsigned long tempsCycle );
         void update();
         
-        enum { FOLLOWLIGNE, LIGNELOST, PAUSE, END, RETRIVELIGN, RECULE, CONFIRME };
+        enum { FOLLOWLIGNE, LIGNELOST, PAUSE, END, RETRIVELIGN, RECULE, REALIGN };
         
     private:
 
@@ -66,6 +66,7 @@ class CRobotJunior{
         void _stop();
         void _followTheLigne( byte capteurLigneGauche, byte capteurLigneDroite);
         bool _retriveLigne();
+        bool _realigne();
         
         char _trame[ TAILLE_TRAME + 1 ];/**< @brief trame NRF24 */
         

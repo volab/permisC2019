@@ -84,8 +84,12 @@ void CRobotJunior::update(){
                 if ( _retriveLigne() ){
                     _motG.stop();
                     _motD.stop(); 
-                    _etatRobot = END;
+                    _etatRobot = REALIGN;
                 }
+                break;
+            case REALIGN:
+            
+                if ( _realigne() ) _etatRobot = END;
                 break;
             case END:
                 for(;;){
@@ -194,7 +198,21 @@ void CRobotJunior::_followTheLigne( byte capteurLigneGauche, byte capteurLigneDr
         }     
 }
 
+/** 
+ @fn bool CRobotJunior::_retriveLigne()
+ @brief recherche la présence de la ligne
+ @param no parameter
+ @return vrai si la ligne a été détectée.
+
+Recherche la ligne en décrivant une spirale de plus en plus grande avec un flitre pour les détections
+intempestives basée sur le compteur _cptRetrieveLigne qui doit atteindre la valeur 5 en dur dans le 
+code
+*/
+/** @todo mettre la valeur max du filtre _cptRetrieveLigne dans un define  */
+/** @todo mettre la valeur du nombre de cycle qui augment la spirale en define */
 bool CRobotJunior::_retriveLigne(){
+    // voir pour le sens de rotation 
+    // aléatoire puis et/ou intelligent
     _motD.avance( _vitesseDeBase );
     _motG.avance( _vitesGaucheRetrive );
     _cptTour++;
@@ -213,6 +231,18 @@ bool CRobotJunior::_retriveLigne(){
 
 }
 
+/** 
+ @fn bool realigne()
+ @brief ré-aligne le robot avec la ligne
+ @param no parameter
+ @return vraie lorsqu'on est aligné
+
+_detailDescription
+*/
+bool realigne(){
+    //plusieurs cas de figure sont à prendre en compteur selon l'ongle d'arrivée par rapport
+    // à la ligne
+}
 
 
 void CRobotJunior::_initLeds(){
