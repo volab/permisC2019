@@ -33,9 +33,9 @@ void CRobotJunior::init( unsigned long tempsCycle ){
     _inRun = false;
     _lignePerdue = false;
     _cptPerteLigne = 0;
-    _etat = FOLLOWLIGNE;
+    // _etat = FOLLOWLIGNE;
     _detectTagOn = false;
-    _etatRobot = FOLLOWLIGNE;
+    _etatRobot = REALIGN;
 }
 
 
@@ -89,14 +89,14 @@ void CRobotJunior::update(){
                 break;
             case REALIGN:
             
-                if ( _realigne() ) _etatRobot = END;
+                if ( _realigne() ) _etatRobot = FOLLOWLIGNE;
                 break;
             case END:
                 for(;;){
                     _allumeDroiteGauche();
-                    delay(200);
+                    delay(100);
                     _eteindLed();
-                    delay(200);
+                    delay(500);
                 }  
                 break;
         }        
@@ -239,9 +239,10 @@ bool CRobotJunior::_retriveLigne(){
 
 _detailDescription
 */
-bool realigne(){
+bool CRobotJunior::_realigne(){
     //plusieurs cas de figure sont à prendre en compteur selon l'ongle d'arrivée par rapport
     // à la ligne
+    return true;
 }
 
 

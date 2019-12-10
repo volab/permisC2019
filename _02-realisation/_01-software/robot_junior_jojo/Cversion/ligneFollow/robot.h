@@ -85,7 +85,7 @@ class CRobotJunior{
         // void _buzTutTut();
         bool _lignePerdue;
         unsigned int _cptPerteLigne; /**< @brief utilisé dans la détection de perte de la ligne */
-        unsigned int _etat;
+        // unsigned int _etat;
         
         unsigned int _detectTagOn;
         int _etatRobot;
