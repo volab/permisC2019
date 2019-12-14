@@ -21,8 +21,11 @@ void TimerSynchrone::setTimerCycles( unsigned int cycles ){
 }
 
 unsigned int TimerSynchrone::update(){
-    unsigned int returnVal = _dureeCycles--;
-    if ( !_dureeCycles ) _ended = true;
+    unsigned int returnVal = 0;
+    if ( _dureeCycles ){
+        returnVal = _dureeCycles--;
+        if ( !_dureeCycles ) _ended = true;  
+    }
     return returnVal;
     
 }

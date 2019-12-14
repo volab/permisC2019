@@ -18,6 +18,9 @@
 Cette classe utilise le temps de cycle du robot pour mesurer le temps.
 
 La durée maximum est de 65535 cycles du robot ou 65535 ms
+
+Attention cette classe ne passe pas la mécanique millis update. LA méthode update doit être
+appelée depuis la méthode update du robot qui gère les temps de cycle.
 */
 class TimerSynchrone{
     public:

@@ -83,7 +83,7 @@ V=200 4.6s, VBAT 7.5V
 
 Le reste des résultats est consigné dans le fichier Excel : speeds.xlsx
 
-En couclusion on est à environ 110tr/min
+En conclusion on est à environ 110tr/min
 
 Calcul du demi tour
 ======================================
@@ -107,6 +107,11 @@ Par expérimentation (branche cpUnTour) on arrive à environ 120 cycles pour un 
 
 En activant les 2 roues une en avant et l'autre en arrière la valeur serait de 55, le mouvement est 
 alors plus agréable.
+
+Maitrise des déplacements
+======================================
+A VBAT = 7.5V, V = 110, on fait du 4mm/cycle de 10ms
+A VBAT = 7.5V, V = 70, on fait du 2mm/cycle
 
 ======================================
 Télémètrie / RF transmissions

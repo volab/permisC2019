@@ -14,12 +14,19 @@
 
 #define TEMPS_CYCLE 10 //ms
 
-#define DISTANCE_ARRET 30 //cm
+#define DISTANCE_ARRET 30 //cm pour capteur us
 
 #define VITESSE_DE_BASE 115
 #define VITESSE_DOUCEMENT 80
+#define TEMPS_DE_MANOEUVRE  45// en nombre de cyles <=> distance parcourue 4mm/cycle quand on est
+                              // lancé (VBAT7.5 C=110) mais combien de cycle met-on pour atteindre
+                              // cette vitesse ? à C=80 on est plus proche de 2mm/cycle
+//valeur théorique souhaité : 25 pour avancer de 100mm mais comme on part de la situation arrêté...
+//Expérimentation 25 <=> 35mm parcouru
+//Avec 45 <=> 80mm
 
-#define CPT_LIG_LOST_MAX 100
+#define CPT_LIG_LOST_MAX 100 //environ 30 à 40cm (environ 4mm/cycle selon VITESSE_DE_BASE et niveau
+                             // de la batterie)
 
 #define LED_AVANT_GAUCHE_PIN 27
 #define LED_AVANT_DROITE_PIN 5

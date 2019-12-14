@@ -95,7 +95,7 @@ class CRobotJunior{
         unsigned int _detectTagOn;
         int _etatRobot;
         unsigned long _cptPause; /**< @brief permet de faire une pause dans la machine d'état */
-        TimerSynchrone ts1;
+        TimerSynchrone _ts1;
         
         
         unsigned int _cptRecul; /**< @brief permet de régler la distance de recule */
@@ -103,6 +103,8 @@ class CRobotJunior{
         
         unsigned int _cptTour;
         unsigned int _vitesGaucheRetrive;
+        
+        bool _manoeuvreEnCours;
 	
 };
 

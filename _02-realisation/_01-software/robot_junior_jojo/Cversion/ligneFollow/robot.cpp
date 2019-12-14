@@ -36,17 +36,28 @@ void CRobotJunior::init( unsigned long tempsCycle ){
     // _etat = FOLLOWLIGNE;
     _detectTagOn = false;
     _etatRobot = REALIGN;
+    _manoeuvreEnCours = false;
 }
 
+/** 
+ @fn void CRobotJunior::update()
+ @brief Méthode de gestion principale du robot...
+ @return no return value and no parameter
 
+Cette méthode comporte une machine d'états qui dicte le comportement du robot.
+
+La variable d'état est l'attribut _etatRobot
+*/
 void CRobotJunior::update(){
     _updateLeds();
     _updatesSensors();
     _liner.forceUpdate();
     _capteurLigneDroite = _liner.getValueDroite();
     _capteurLigneGauche = _liner.getValueGauche();
-    _buz.update(); 
+    _buz.update();
+        
     if ( millis() - _prevMillis > _tempsCycle ){
+        _ts1.update();
         digitalWrite( TIMECYCLEMESU_PIN , HIGH ); //to mesure cycle time
         _prevMillis = millis();
 
@@ -62,12 +73,12 @@ void CRobotJunior::update(){
                 _motG.stop();
                 _motD.stop(); 
                 // _cptPause = 300;
-                ts1.setTimerCycles( 300 );
+                _ts1.setTimerCycles( 300 );
                 _etatRobot = PAUSE;
                 break;
             case PAUSE:
                 // if ( !_cptPause-- ){
-                if ( !ts1.update() ){
+                if ( _ts1.isEnded() ){
                     _cptRecul = CPT_LIG_LOST_MAX+CPT_LIG_LOST_MAX/2;
                     _etatRobot = RECULE;
                 } 
@@ -252,46 +263,38 @@ bool CRobotJunior::_realigne(){
     //si capteur ligne = 1 ou 2 ou 3 rien à faire
     //Après essais, il ya quand même des cas où ça passe passe
     //quand l'angle est
-    if ( _capteurLigneGauche == 1 || _capteurLigneDroite == 1) return true;
+    if  (!_manoeuvreEnCours && ( _capteurLigneGauche == 1 || _capteurLigneDroite == 1)) return true;
     
     // if( _capteurLigneGauche == 4 ){ //cas 2 cf.tableau Excel
     // if( _capteurLigneGauche == 2 ){ //cas 3
-        //Stratégie 1 : avance doucment en ligne droite jusqu'à avoir 1,1 ou 1,0 ou 0,1
+
+        // // Stratégie 1 : avance doucment en ligne droite jusqu'à avoir 1,1 ou 1,0 ou 0,1
         // _motG.avance( _vitesseDoucement );
         // _motD.avance( _vitesseDoucement );
         // return false;        
     // }
 
-    if( _capteurLigneGauche == 6 ){ //cas 4
-        //Stratégie 2 : tourne doucment avec le moteur du mem coté jusqu'à avoir 1,1 ou 1,0 ou 0,1
-        // if ( !manoeuvreEnCours ){
-            
-        // }
-        _motG.avance( _vitesseDoucement +20);
-        _motD.avance( _vitesseDoucement );
-        return false;        
+    // if( _capteurLigneGauche == 6 ){ //cas 4
+    if( _capteurLigneGauche == 3 ){ //cas 6
+        //Stratégie 2 :
+        // commence par avancé doucement d'environ 10cm
+        // puis tourne doucment avec le moteur du mem coté jusqu'à avoir 1,1 ou 1,0 ou 0,1
+        if ( !_manoeuvreEnCours ){
+            _ts1.setTimerCycles( TEMPS_DE_MANOEUVRE ); // dépendant de la vitesse du robot !
+            _manoeuvreEnCours = true;
+            _motG.avance( _vitesseDoucement );
+            _motD.avance( _vitesseDoucement );            
+            return false;
+        }   
+    }
+    //Deuxième partie de S2
+    if ( _ts1.isEnded() && _manoeuvreEnCours ){
+        _motG.avance( _vitesseDoucement );
+        _motD.stop();
+        _manoeuvreEnCours = false;
     }
   
-    
-
-    // if ( _capteurLigneGauche == 3 && _capteurLigneDroite == 0){
-    // if ( _capteurLigneDroite == 7 || _capteurLigneDroite == 3 ){
-        // _motG.avance( 70 );
-        // return false;
-    // }
-    // if ( _capteurLigneGauche == 7 || _capteurLigneGauche == 3 ){
-        // _motD.avance( 70 );
-        // return false;
-    // }    
-    // if (       ( _capteurLigneGauche == 3 )
-            // || ( _capteurLigneGauche & 4 )
-            // || ( _capteurLigneDroite == 3 )
-            // || ( _capteurLigneDroite & 4 )
-        // ){
-        // _motG.avance( 70 );
-        // _motD.avance( 70 );
-        // return false;
-    // }
+ 
 
 
         
