@@ -16,6 +16,7 @@
 #include "buzer.h"
 #include "motor.h"
 #include "RF24.h"
+#include "timerSynchrone.h"
 
 #ifndef _CROBOTJUNIOR_H
 #define _CROBOTJUNIOR_H
@@ -64,7 +65,7 @@ class CRobotJunior{
         void _tourneDroite( int force );
         
         void _stop();
-        void _followTheLigne( byte capteurLigneGauche, byte capteurLigneDroite);
+        void _followTheLigne();
         bool _retriveLigne();
         bool _realigne();
         
@@ -75,9 +76,13 @@ class CRobotJunior{
         
         //Attributs privés
         unsigned int _vitesseDeBase = VITESSE_DE_BASE ;
+        unsigned int _vitesseDoucement = VITESSE_DOUCEMENT ;
         unsigned long _tempsCycle;          
         unsigned long _prevMillis;
         byte _cpt = 0; /**< @brief Usage ? */
+        
+        byte _capteurLigneDroite;
+        byte _capteurLigneGauche;
         
         float _bat;
         byte _batEnt, _batDec;
@@ -90,6 +95,7 @@ class CRobotJunior{
         unsigned int _detectTagOn;
         int _etatRobot;
         unsigned long _cptPause; /**< @brief permet de faire une pause dans la machine d'état */
+        TimerSynchrone ts1;
         
         
         unsigned int _cptRecul; /**< @brief permet de régler la distance de recule */

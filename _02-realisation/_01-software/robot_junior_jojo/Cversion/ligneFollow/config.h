@@ -17,6 +17,7 @@
 #define DISTANCE_ARRET 30 //cm
 
 #define VITESSE_DE_BASE 115
+#define VITESSE_DOUCEMENT 80
 
 #define CPT_LIG_LOST_MAX 100
 

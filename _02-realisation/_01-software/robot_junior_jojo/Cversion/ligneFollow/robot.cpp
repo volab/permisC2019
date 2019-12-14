@@ -43,15 +43,16 @@ void CRobotJunior::update(){
     _updateLeds();
     _updatesSensors();
     _liner.forceUpdate();
+    _capteurLigneDroite = _liner.getValueDroite();
+    _capteurLigneGauche = _liner.getValueGauche();
     _buz.update(); 
     if ( millis() - _prevMillis > _tempsCycle ){
         digitalWrite( TIMECYCLEMESU_PIN , HIGH ); //to mesure cycle time
         _prevMillis = millis();
-        byte capteurLigneDroite = _liner.getValueDroite();
-        byte capteurLigneGauche = _liner.getValueGauche();
+
         switch ( _etatRobot ){
             case FOLLOWLIGNE:
-                _followTheLigne( capteurLigneGauche, capteurLigneDroite );
+                _followTheLigne();
                 if ( _lignePerdue ){
                    _buz.ligneLostSound();
                   _etatRobot = LIGNELOST;  
@@ -60,11 +61,13 @@ void CRobotJunior::update(){
             case LIGNELOST:
                 _motG.stop();
                 _motD.stop(); 
-                _cptPause = 300;
+                // _cptPause = 300;
+                ts1.setTimerCycles( 300 );
                 _etatRobot = PAUSE;
                 break;
             case PAUSE:
-                if ( !_cptPause-- ){
+                // if ( !_cptPause-- ){
+                if ( !ts1.update() ){
                     _cptRecul = CPT_LIG_LOST_MAX+CPT_LIG_LOST_MAX/2;
                     _etatRobot = RECULE;
                 } 
@@ -89,7 +92,10 @@ void CRobotJunior::update(){
                 break;
             case REALIGN:
             
-                if ( _realigne() ) _etatRobot = FOLLOWLIGNE;
+                if ( _realigne() ){
+                    _etatRobot = FOLLOWLIGNE;
+                    _lignePerdue = false;
+                }
                 break;
             case END:
                 for(;;){
@@ -101,7 +107,7 @@ void CRobotJunior::update(){
                 break;
         }        
         
-        if ( capteurLigneDroite == 7 && capteurLigneGauche == 7 ) return; //pour arrêter les acquisitions
+        if ( _capteurLigneDroite == 7 && _capteurLigneGauche == 7 ) return; //pour arrêter les acquisitions
 
         // char trame[ TAILLE_TRAME + 1 ];
         _bat = (analogRead(A0)*5.0/1024.0)/.586;
@@ -121,11 +127,13 @@ void CRobotJunior::update(){
         }
         if (_etatRobot == RECULE) c='R';
         if (_etatRobot == RETRIVELIGN) c='C';
+        if (_etatRobot == REALIGN) c='A';
+        if (_etatRobot == FOLLOWLIGNE) c='F';
         if ( _detectTagOn != 0) _detectTagOn--;
         sprintf( _trame, "%06lu,%d,%d,%d.%d,%c"
                     , temps
-                    , capteurLigneGauche
-                    , capteurLigneDroite
+                    , _capteurLigneGauche
+                    , _capteurLigneDroite
                     , _batEnt
                     , _batDec
                     , c );
@@ -139,7 +147,7 @@ void CRobotJunior::update(){
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //                        Méthodes privées                                                        //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-void CRobotJunior::_followTheLigne( byte capteurLigneGauche, byte capteurLigneDroite){
+void CRobotJunior::_followTheLigne(){
         const int constForceTourne = 20;
         int forceTourne;
 
@@ -159,12 +167,12 @@ void CRobotJunior::_followTheLigne( byte capteurLigneGauche, byte capteurLigneDr
         } else if( !_inRun){
             _inRun = true;
         }
-        if ( capteurLigneDroite == 7 && capteurLigneGauche == 7 ){ //stop if no ground
+        if ( _capteurLigneDroite == 7 && _capteurLigneGauche == 7 ){ //stop if no ground
             _motG.stop();
             _motD.stop(); 
             return;            
         }
-        if(( capteurLigneDroite == 0)  &&  ( capteurLigneGauche == 0 )){
+        if(( _capteurLigneDroite == 0)  &&  ( _capteurLigneGauche == 0 )){
             _motG.avance( _vitesseDeBase );
             _motD.avance( _vitesseDeBase );
             _eteindLed();
@@ -172,23 +180,23 @@ void CRobotJunior::_followTheLigne( byte capteurLigneGauche, byte capteurLigneDr
         } else {
             _cptPerteLigne = 0;
             forceTourne = constForceTourne;
-            if(capteurLigneDroite > 0){
-                if(capteurLigneDroite >= 2 ){
+            if(_capteurLigneDroite > 0){
+                if(_capteurLigneDroite >= 2 ){
                     forceTourne = forceTourne * 2;
                 }
-                if(capteurLigneDroite >= 4 ){
+                if(_capteurLigneDroite >= 4 ){
                     forceTourne = forceTourne * 2;
                 }
                 // Serial.println("forceTourne droite = " + String( forceTourne ) );
                 _tourneDroite(forceTourne);
                 _allumeLedDroite();
             }
-            if(capteurLigneGauche > 0){
+            if(_capteurLigneGauche > 0){
                 forceTourne = constForceTourne;
-                if(capteurLigneGauche >= 2 ){
+                if(_capteurLigneGauche >= 2 ){
                     forceTourne = forceTourne * 2;
                 }
-                if(capteurLigneGauche >= 4 ){
+                if(_capteurLigneGauche >= 4 ){
                     forceTourne = forceTourne * 2;
                 }
                 // Serial.println("forceTourne gauche = " + String( forceTourne ) );
@@ -221,10 +229,9 @@ bool CRobotJunior::_retriveLigne(){
         if (_vitesGaucheRetrive == 0) _vitesGaucheRetrive = 70;
         else _vitesGaucheRetrive +=20;
     }
-    byte capteurLigneDroite = _liner.getValueDroite();
-    byte capteurLigneGauche = _liner.getValueGauche();
+
     //_cptRetrieveLigne pour éviter les fausses détections
-    if ( capteurLigneDroite != 0 || capteurLigneGauche !=0 ) _cptRetrieveLigne++;
+    if ( _capteurLigneDroite != 0 || _capteurLigneGauche !=0 ) _cptRetrieveLigne++;
     else _cptRetrieveLigne = 0;
     if ( _cptRetrieveLigne >= 5 ) return true;
     return false;
@@ -242,7 +249,54 @@ _detailDescription
 bool CRobotJunior::_realigne(){
     //plusieurs cas de figure sont à prendre en compteur selon l'ongle d'arrivée par rapport
     // à la ligne
-    return true;
+    //si capteur ligne = 1 ou 2 ou 3 rien à faire
+    //Après essais, il ya quand même des cas où ça passe passe
+    //quand l'angle est
+    if ( _capteurLigneGauche == 1 || _capteurLigneDroite == 1) return true;
+    
+    // if( _capteurLigneGauche == 4 ){ //cas 2 cf.tableau Excel
+    // if( _capteurLigneGauche == 2 ){ //cas 3
+        //Stratégie 1 : avance doucment en ligne droite jusqu'à avoir 1,1 ou 1,0 ou 0,1
+        // _motG.avance( _vitesseDoucement );
+        // _motD.avance( _vitesseDoucement );
+        // return false;        
+    // }
+
+    if( _capteurLigneGauche == 6 ){ //cas 4
+        //Stratégie 2 : tourne doucment avec le moteur du mem coté jusqu'à avoir 1,1 ou 1,0 ou 0,1
+        // if ( !manoeuvreEnCours ){
+            
+        // }
+        _motG.avance( _vitesseDoucement +20);
+        _motD.avance( _vitesseDoucement );
+        return false;        
+    }
+  
+    
+
+    // if ( _capteurLigneGauche == 3 && _capteurLigneDroite == 0){
+    // if ( _capteurLigneDroite == 7 || _capteurLigneDroite == 3 ){
+        // _motG.avance( 70 );
+        // return false;
+    // }
+    // if ( _capteurLigneGauche == 7 || _capteurLigneGauche == 3 ){
+        // _motD.avance( 70 );
+        // return false;
+    // }    
+    // if (       ( _capteurLigneGauche == 3 )
+            // || ( _capteurLigneGauche & 4 )
+            // || ( _capteurLigneDroite == 3 )
+            // || ( _capteurLigneDroite & 4 )
+        // ){
+        // _motG.avance( 70 );
+        // _motD.avance( 70 );
+        // return false;
+    // }
+
+
+        
+    
+    return false;
 }
 
 
