@@ -263,7 +263,7 @@ bool CRobotJunior::_realigne(){
     //si capteur ligne = 1 ou 2 ou 3 rien à faire
     //Après essais, il ya quand même des cas où ça passe passe
     //quand l'angle est
-    if  (!_manoeuvreEnCours && ( _capteurLigneGauche == 1 || _capteurLigneDroite == 1)) return true;
+
     
     // if( _capteurLigneGauche == 4 ){ //cas 2 cf.tableau Excel
     // if( _capteurLigneGauche == 2 ){ //cas 3
@@ -275,7 +275,14 @@ bool CRobotJunior::_realigne(){
     // }
 
     // if( _capteurLigneGauche == 6 ){ //cas 4
-    if( _capteurLigneGauche == 3 ){ //cas 6
+    // if( _capteurLigneGauche == 3 ){ //cas 6
+    // if( _capteurLigneGauche == 7 ){ //cas 7
+    // if( _capteurLigneGauche == 3 &&  _capteurLigneDroite == 1 ){ //cas 9
+    // if( _capteurLigneGauche == 7 &&  _capteurLigneDroite == 1 ){ //cas 10   
+    // if( _capteurLigneGauche == 3 &&  _capteurLigneDroite == 3 ){ //cas 12  
+    if( _capteurLigneGauche == 7 &&  _capteurLigneDroite == 7 ){ //cas 14  
+
+//7,7 cas 14
         //Stratégie 2 :
         // commence par avancé doucement d'environ 10cm
         // puis tourne doucment avec le moteur du mem coté jusqu'à avoir 1,1 ou 1,0 ou 0,1
@@ -294,7 +301,7 @@ bool CRobotJunior::_realigne(){
         _manoeuvreEnCours = false;
     }
   
- 
+     if  (!_manoeuvreEnCours && ( _capteurLigneGauche == 1 || _capteurLigneDroite == 1)) return true;
 
 
         
