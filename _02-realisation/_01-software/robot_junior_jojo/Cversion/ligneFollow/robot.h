@@ -104,7 +104,11 @@ class CRobotJunior{
         unsigned int _cptTour;
         unsigned int _vitesGaucheRetrive;
         
-        bool _manoeuvreEnCours;
+        bool _s2_1, _s2_2;
+        bool _manoeuvreEnCours;/**< @brief uniquement utilisé dans la manoeuvre de la 
+        stratégie 2 de _realigne() */
+        bool _tourneAGauche; /**< @brief uniquement utilisé dans la manoeuvre de la 
+        stratégie 2 de _realigne() */
 	
 };
 
