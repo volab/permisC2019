@@ -1,24 +1,6 @@
-.. PermisC_2019 documentation master file, created by
-   sphinx-quickstart on Sun Sep 15 00:07:13 2019.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-   
-
-Infos générales sur le projet Permis C 2019
-==============================================
-
-   :Auteur:            `VoLAB <http://www.vorobotics.com/wp/>`_
-   :Projet:             Permis C 2019
-   :dépôt_GitHub:       https://github.com/volab/permisC2019.git
-   :documentation:      https://volab.github.io/permisC2019/
-   :page_wiki:          http://www.vorobotics.com/wiki/index.php?title=Nos_Projets#Robots
-   :Licence:            CC BY-NC-SA 4.0
-   :Liens:              https://creativecommons.org/licenses/by-nc-sa/4.0/ 
-
-------------------------------------------------------------------------------------------
-
+++++++++++++++++++++++++++++++++++++++++++++
 Documentation du projet
-=============================
+++++++++++++++++++++++++++++++++++++++++++++
 
 .. contents:: Table of Contents
 
@@ -42,7 +24,7 @@ des collégiens et lycéens ansi que la conception d'un robot 2 roues conçu par
    
 Caractéristiques du robot
 ========================================
-- Capteurs: 3 capteurs ultra son SRF-04 à l'avant (détection 2cm à 3m), 3 capteurs infrarouge à l'arrière
+- Capteurs: 3 capteurs ultra son SRF-04 à l'avant, 3 capteur infrarouge à l'arrière
 - Motorisation : 2 moteurs à courant continu  200R / min 1:48 
 - Driver moteur : L9110S
 - Calculateur : Arduino 2560 Pro
@@ -59,7 +41,7 @@ Assembler son Robot
 Voici les grandes étapes pour fabriquer notre robot.
 
 #. Commander les 2 cartes électronique sur le site `EasyEda.com`_  (tips commandez les cartes
-nues chez le partenaire d'EasyEDA à savoir Jlpcb qui est en liens directes depuis le site de EasyEDA)
+nues chez le partenaire d'EasyEDA à soir Jlpcb qui est en liens directes depuis le site de EasyEDA)
 
 #. commander les composants
 
@@ -83,12 +65,12 @@ Les cartes électroniques
    
    Fichier Gerber carte principale
    
-.. figure:: images/pcbCarteIR.jpg
+.. figure:: images/cartePrincipale.jpg
    :width: 300 px
    :figwidth: 100%
    :align: center
    
-   Fichier Gerber carte capteurs infrarouges   
+   Fichier Gerber carte carteurs infrarouge   
 
 
 Liste des composants
@@ -160,16 +142,6 @@ Attention cette opération est délicate et les broches métalique de ces petits
 sont fragile. Si vous ne le sentez pas poussez la porte d'un fablab près de chez vous,
 il y aura certainement une bonne âme pour vous aider.
 
-Ajout de dernière minute. Suite à nos essais, nous avons constaté qu'il convient d'ajouter un 
-condensateur de filtrage sur l'alimentation des moteurs de 470uF/16V.
-
-.. figure:: images/capaAjoutee.jpg
-   :width: 200 px
-   :figwidth: 100%
-   :alt: Condesateur alimentation moteur
-   :align: center
-   
-   Condensateur 470uF/16 sur l'alimentation moteur 
 
 Montage mécanique
 ===================
@@ -197,13 +169,6 @@ Les étapes du montage
 #. connecter les moteur à la carte L9110 puis mettre celle-ci en place sur la carte principal
 #. Oui vous pouvez mettre les roues !
 
-.. figure:: images/emplacementcolonette.jpg
-   :width: 500 px
-   :figwidth: 100%
-   :alt: emplacement colonettes
-   :align: center
-   
-   Emplacement des 4 colonettes - trous filetés pas besoin d'écrou
 
 
 .. figure:: images/charniereArriere.jpg
@@ -223,38 +188,16 @@ Les étapes du montage
 Attention les fils rouges des moteurs doivent être connecté en partant du centre de la L9110.
 Attention également à bien connecter le moteur de droite à droite !   
 
-.. |clearer|  raw:: html
-
-    <div class="clearer"></div>
-
 Programmer son robot
 =========================
-.. image:: images/logo_mblock5.jpg
-   :scale: 20 %
-   :align: right
-   :target: https://www.makeblock.com/
-
-La programmation du robot se fait grâce à MBlock de chez `MakeBlock`_
+La programmation du robot se fait grâce à MBlock de chez `MakeBlock`_ link_desc
 
 .. _`MakeBlock` : https://www.makeblock.com/
-
-Et pour vous aider, Professeur Gilles ;-) nous a rédigé de jolies `fiches pédagogiques`_
-
-.. _`fiches pédagogiques` :  https://github.com/volab/permisC2019/tree/master/_01-docs/_01-userDoc/fiches_peda_pcb_sansvariable/doc_peda_pcb_sansvariable_pdf
-
-.. container::
-
-    .. image:: images/capteur_ir.JPG
-       :width: 100 %
-       :scale: 70 %
-       :align: left
-       
-|clearer|
 
 Pour aller plus loin
 ======================
 Si vous le désirer ce robot peut également être programmer en langage C, en Python... 
-mais c'est une autre histoire...
+mais c'est une autre hostoire...
 
 Voici donc quelques liens :
 
@@ -262,29 +205,15 @@ Le site officiel `ARDUINO`_
 
 Un bon tuto sur `OpenClassRoom`_
 
-Fabrication d'un `Labyrinthe avec des cartons et des pièces imprimées en 3D`_
-
-`Un générateur de labyrinthe`_
-
 `Python dans une ATMega2560`_ pour les spécialistes
-
-`Reduicing lobe of SRF-04`_
-
-Autre capteur à ultrason SRF-02 en I2C
-
-
 
 .. _`ARDUINO` : https://www.arduino.cc/
 
 .. _`OpenClassRoom` : https://openclassrooms.com/fr/courses/2778161-programmez-vos-premiers-montages-avec-arduino
 
-.. _`Labyrinthe avec des cartons et des pièces imprimées en 3D` : https://www.google.com/search?client=firefox-b-d&channel=crow&q=labirynthe
-
-.. _`Un générateur de labyrinthe` : http://www.mazegenerator.net/
-
 .. _`Python dans une ATMega2560` :  https://forum.arduino.cc/index.php?topic=7558.0
 
-.. _`Reduicing lobe of SRF-04` : https://www.robot-electronics.co.uk/htm/reducing_sidelobes_of_srf10.htm
+
 
 On pourra aussi envisager d'autres options comme des moustaches, un capteur pour suiveur de ligne...
 
@@ -295,5 +224,3 @@ Weblinks
 =============
 
 .. target-notes::
-
-
