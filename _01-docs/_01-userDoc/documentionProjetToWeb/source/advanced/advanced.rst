@@ -3,7 +3,8 @@ Advanced stuf for robot Junior
 ++++++++++++++++++++++++++++++++
 
 .. WARNING::
-    Pour fonctionner la maquette à besoin de la station sol à cause du NRF24 bloquant.
+    Pour fonctionner la maquette à besoin de la station sol à cause du NRF24 bloquant
+    (sauf si la ligne est commentée).
 
 ================================
 Bilan hardware
