@@ -43,9 +43,6 @@ void setup(){
     Serial.begin( RSSPEED );
     Serial.println( "Sketch start...");
     robot.init( TEMPS_CYCLE );
-    // pinMode(LEDVERIF, OUTPUT);
-    // if (!driver.init())
-    // Serial.println("init failed");
     prevMillis = millis();
 
     radio.begin();
@@ -74,71 +71,8 @@ void setup(){
 bool ledState;
 char trame[ TAILLE_TRAME + 1 ];
 byte cpt = 0;
+
 void loop(){
-    robot.update();
-    // sprintf( trame, "%03d,3.2,0.0", cpt, 2 );
-    // if ( millis() - prevMillis >= 100 ){
-        // prevMillis = millis();
-        // cpt++;
-        // if (cpt==10)cpt = 0;
-        // Serial.print(F("Now sending : "));
-        // Serial.print( trame );
-        // Serial.print( " : taille trame  : "); Serial.print( strlen( trame) );
-        // Serial.print(" : ");
-        // if (!radio.write( trame, TAILLE_TRAME )){
-            // Serial.println(F("failed"));
-        // } else {
-            // Serial.println();
-        // }
-    // }
-    
-    
-
-
-    // // unsigned long start_time = micros();                             // Take the time, and send it.  This will block until complete
-    // unsigned long start_time[2];
-    // start_time[0]= micros();                             // Take the time, and send it.  This will block until complete
-    // start_time[1]= millis();
-    // unsigned long tx_time = micros();
-     // if (!radio.write( start_time, 2*sizeof(unsigned long) )){
-       // Serial.println(F("failed"));
-     // }
-    // // Serial.print("TX time = ");Serial.println( micros() - tx_time );
-    // radio.startListening();                                    // Now, continue listening
-    
-    // unsigned long started_waiting_at = micros();               // Set up a timeout period, get the current microseconds
-    // boolean timeout = false;                                   // Set up a variable to indicate if a response was received or not
-    
-    // while ( ! radio.available() ){                             // While nothing is received
-      // if (micros() - started_waiting_at > 200000 ){            // If waited longer than 200ms, indicate timeout and exit while loop
-          // timeout = true;
-          // break;
-      // }      
-    // }
-        
-    // if ( timeout ){                                             // Describe the results
-        // Serial.println(F("Failed, response timed out."));
-    // }else{
-        // unsigned long got_time[2];                                 // Grab the response, compare, and send to debugging spew
-        // radio.read( got_time, 2*sizeof(unsigned long) );
-        // unsigned long end_time = micros();
-        
-        // // Spew it
-        // Serial.print(F("Sent "));
-        // Serial.print(start_time[0]);
-        // Serial.print(start_time[1]);
-        // Serial.print(F(", Got response "));
-        // Serial.print(got_time[0]);
-        // Serial.print(got_time[1]);
-        // Serial.print(F(", Round-trip delay "));
-        // Serial.print(end_time-start_time[0]);
-        // Serial.println(F(" microseconds"));
-    // }
-
-    // // Try again 1s later
-    // delay(1000);
-  // }
-
-    
+    robot.update(); // Eh oui ! Il n'y a que ça dans la boucle loop
 }
 
