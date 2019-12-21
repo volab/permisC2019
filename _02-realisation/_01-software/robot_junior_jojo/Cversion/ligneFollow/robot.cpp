@@ -236,7 +236,7 @@ void CRobotJunior::update(){
                     , _batEnt
                     , _batDec
                     , c );
-        radio.write( _trame, TAILLE_TRAME, 0 ); //noack - enableDynamicAck appelé dans le setup
+        // radio.write( _trame, TAILLE_TRAME, 0 ); //noack - enableDynamicAck appelé dans le setup
         
         digitalWrite( TIMECYCLEMESU_PIN , LOW ); //mesure temps de cycle
     }       

@@ -2,7 +2,8 @@
 Advanced stuf for robot Junior
 ++++++++++++++++++++++++++++++++
 
-
+.. WARNING::
+    Pour fonctionner la maquette à besoin de la station sol à cause du NRF24 bloquant.
 
 ================================
 Bilan hardware
@@ -13,10 +14,10 @@ sous Github
 
 La dessus, on ajoute 6 broches pour le capteur du `Suiveur de ligne`_ (6,8,10,14,16,18)
 
-Le module NRF24 pour la télémétrie utilise les broche SPI cf `Télémètrie / RF transmissions`_ ainsi
+Le module NRF24 pour la télémétrie utilise les broches SPI cf `Télémètrie / RF transmissions`_ ainsi
 que 48 et 49
 
-La mesure de la tension batterie sur A0
+La mesure de la tension batterie est sur A0
 
 
 .. _`les fiches pédagogiques` : https://github.com/volab/permisC2019/blob/master/_01-docs/_01-userDoc/fiches_peda_pcb_sansvariable/doc_peda_pcb_sansvariable_pdf/robot_junior_Annexe.pdf
@@ -133,6 +134,17 @@ Maitrise des déplacements
 A VBAT = 7.5V, V = 110, on fait du 4mm/cycle de 10ms
 A VBAT = 7.5V, V = 70, on fait du 2mm/cycle
 
+Fin des travaux suivenur de ligne décembre 2019 
+=================================================
+Resterait à faire:
+ - évaluation du sens du virage avant la perte de ligne
+ - ralentir dans les virages
+ - plusieurs canaux de télémétrie (BLE4.0 et LORA cartes reçues)
+ - adapter la vitesse en fonction de la tension batterie
+ - ajouter l'odomètrie
+ 
+ 
+
 ======================================
 Télémètrie / RF transmissions
 ======================================
@@ -205,7 +217,7 @@ pour un nom ne comportant qu'un seul digit de COM37 vers COM2 par exemple.
 
 Essais à 433MHz, 470, 434 avec les même id node et des id différents. sans aucun succès.
 
-Module récupérer il y a quelques année impossible de dire s'ils était fonctionnels.
+Module récupérer il y a quelques année impossible de dire s'ils étaient fonctionnels.
 
 NF24 
 ======================================
