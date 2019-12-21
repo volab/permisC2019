@@ -33,9 +33,8 @@ void CRobotJunior::init( unsigned long tempsCycle ){
     _inRun = false;
     _lignePerdue = false;
     _cptPerteLigne = 0;
-    // _etat = FOLLOWLIGNE;
     _detectTagOn = false;
-    _etatRobot = REALIGN;
+    _etatRobot = FOLLOWLIGNE;
     _manoeuvreEnCours = false;
     _tourneAGauche = true; //il faut bien choisir
     _s2_1 = false;
@@ -105,11 +104,51 @@ void CRobotJunior::update(){
                 }
                 break;
             case REALIGN:
-            
-                if ( _realigne() ){
-                    _etatRobot = FOLLOWLIGNE;
-                    _lignePerdue = false;
+                if(    (_capteurLigneGauche == 6 && _capteurLigneDroite == 0 ) //cas 4
+                    || (_capteurLigneGauche == 3 && _capteurLigneDroite == 0 ) //cas 6
+                    || (_capteurLigneGauche == 7 && _capteurLigneDroite == 0 ) //cas 7
+                    || (_capteurLigneGauche == 3 && _capteurLigneDroite == 1 ) //cas 9
+                    || (_capteurLigneGauche == 7 && _capteurLigneDroite == 1 ) //cas 10
+                    || (_capteurLigneGauche == 3 && _capteurLigneDroite == 3 ) //cas 12
+                    || (_capteurLigneGauche == 7 && _capteurLigneDroite == 3 ) //cas 13 
+                ){
+                    _tourneAGauche = false; //petite subtilité on détecte à gauche et on tourne à droite    
+                    _etatRobot = REAL_ST21;  
+                } 
+                if(    (_capteurLigneDroite == 6 && _capteurLigneGauche == 0) //cas 4  
+                    || (_capteurLigneDroite == 3 && _capteurLigneGauche == 0) //cas 6 
+                    || (_capteurLigneDroite == 7 && _capteurLigneGauche == 0) //cas 7
+                    || (_capteurLigneDroite == 3 && _capteurLigneGauche == 1) //cas 9
+                    || (_capteurLigneDroite == 7 && _capteurLigneGauche == 1) //cas 10
+                    || (_capteurLigneDroite == 7 && _capteurLigneGauche == 3) //cas 13
+                ){
+                    _tourneAGauche = true;
+                    _etatRobot = REAL_ST21;    
                 }
+                if (   (_capteurLigneGauche == 7 && _capteurLigneDroite == 7)
+                    || (_capteurLigneDroite == 3 && _capteurLigneGauche == 3) //cas 12
+                    || (_capteurLigneDroite == 1 && _capteurLigneGauche == 1)
+                ){
+                    _tourneAGauche = random(2)==1;
+                    _etatRobot = REAL_ST21;                    
+                }
+                if ( _capteurLigneGauche == 0 && _capteurLigneDroite == 0 )
+                    _etatRobot = REAL_ST0;
+                
+                if (    (_capteurLigneGauche == 4 && _capteurLigneDroite == 0)
+                     || (_capteurLigneGauche == 2 && _capteurLigneDroite == 0)
+                     || (_capteurLigneDroite == 4 && _capteurLigneGauche == 0)
+                     || (_capteurLigneDroite == 2 && _capteurLigneGauche == 0)
+                )
+                    _etatRobot = REAL_ST1;
+                    
+                if (    (_capteurLigneGauche == 1 && _capteurLigneDroite == 0)
+                     || (_capteurLigneDroite == 1 && _capteurLigneGauche == 0)
+                ){
+                        _lignePerdue = false;
+                        _etatRobot = FOLLOWLIGNE;      
+                }
+
                 break;
             case END:
                 for(;;){
@@ -118,13 +157,50 @@ void CRobotJunior::update(){
                     _eteindLed();
                     delay(500);
                 }  
+                break;  
+            case REAL_ST21:
+                _ts1.setTimerCycles( TEMPS_DE_MANOEUVRE ); // dépendant de la vitesse du robot !
+                _avanceDoucement();
+                _etatRobot = REAL_ATTTIMER;
+                break; 
+            case REAL_ATTTIMER:
+                if( _ts1.isEnded() ) _etatRobot = REAL_ST22;
+                break;
+            case REAL_ST22:
+                if ( _tourneAGauche ) _tourneGauche();
+                else _tourneDroite();
+                _etatRobot = REAL_ATTALIG;
+                break;
+            case REAL_ATTALIG:
+                if ( _capteurLigneGauche == 1 || _capteurLigneDroite == 1){
+                    _lignePerdue = false;
+                    _etatRobot = FOLLOWLIGNE;                    
+                }
+
+                break;
+            case REAL_ST1:
+                _avanceDoucement();
+                _etatRobot = REAL_ATTALIG;
+                break;
+            case REAL_ST0:
+                //pile ou face ???
+                //Si c'était un virage droite alors tourne à gauche
+                //pour le moment 
+                if ( random(2)){
+                    _tourneGauche(); 
+                } else {
+                    _tourneDroite();
+                }
+                _etatRobot = REAL_ATTALIG;
                 break;
         }        
         
         if ( _capteurLigneDroite == 7 && _capteurLigneGauche == 7 ) return; //pour arrêter les acquisitions
 
         // char trame[ TAILLE_TRAME + 1 ];
-        _bat = (analogRead(A0)*5.0/1024.0)/.586;
+        _bat = (analogRead(MES_U_BATT)*5.0/1024.0)/.586;
+        
+        //rapport de transformation ajusté par essais
         _batEnt = int( _bat );
         _batDec = int( (_bat - _batEnt) *10.0 );
         unsigned long temps = millis();
@@ -139,10 +215,19 @@ void CRobotJunior::update(){
                 // soit environ 40cm à 0.47 m/s VBAT 7V  Vconsigne 110                 
             }
         }
-        if (_etatRobot == RECULE) c='R';
-        if (_etatRobot == RETRIVELIGN) c='C';
-        if (_etatRobot == REALIGN) c='A';
-        if (_etatRobot == FOLLOWLIGNE) c='F';
+
+        switch (_etatRobot){
+            case RECULE:        c='R'; break;
+            case RETRIVELIGN:   c='C'; break;
+            case REALIGN:       c='A'; break;
+            case FOLLOWLIGNE:   c='F'; break;
+            case REAL_ST21:     c='1'; break;
+            case REAL_ATTTIMER: c='2'; break;
+            case REAL_ST22:     c='3'; break;
+            case REAL_ATTALIG:  c='4'; break;
+            case REAL_ST1:      c='5'; break;
+            case REAL_ST0:      c='6'; break;            
+        }        
         if ( _detectTagOn != 0) _detectTagOn--;
         sprintf( _trame, "%06lu,%d,%d,%d.%d,%c"
                     , temps
@@ -156,7 +241,6 @@ void CRobotJunior::update(){
         digitalWrite( TIMECYCLEMESU_PIN , LOW ); //mesure temps de cycle
     }       
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //                        Méthodes privées                                                        //
@@ -260,6 +344,7 @@ bool CRobotJunior::_retriveLigne(){
 
 _detailDescription
 */
+/*
 bool CRobotJunior::_realigne(){
     //plusieurs cas de figure sont à prendre en compteur selon l'ongle d'arrivée par rapport
     // à la ligne
@@ -314,6 +399,7 @@ bool CRobotJunior::_realigne(){
     //Deuxième partie de S2
     if ( _s2_2 && _ts1.isEnded() && _manoeuvreEnCours ){
         if ( _tourneAGauche ){
+            // _tourneGauche();
             _motG.avance( _vitesseDoucement );
             _motD.stop();            
         } else {
@@ -335,6 +421,7 @@ bool CRobotJunior::_realigne(){
     
     return false;
 }
+*/
 
 
 void CRobotJunior::_initLeds(){
@@ -427,16 +514,21 @@ void CRobotJunior::_tourneGauche( int force ){
     _motD.avance( _vitesseDeBase + force );
     _motG.avance( _vitesseDeBase - force );
 }
+void CRobotJunior::_tourneGauche( ){
+    _motD.avance( _vitesseDoucement );
+    _motG.stop();     
+}
 
 void CRobotJunior::_tourneDroite( int force ){
     _motD.avance( _vitesseDeBase - force );
     _motG.avance( _vitesseDeBase + force );    
 }
+void CRobotJunior::_tourneDroite( ){
+    _motG.avance( _vitesseDoucement );
+    _motD.stop();   
+}
 
-// void CRobotJunior::_buzTutTut(){
-
-    // _buz.setPeriod( 50 );
-    // _buz.setFreq(800);
-    // _buz.setDuration( 100 );
-    // _buz.setCount( 2 );
-// }
+void CRobotJunior::_avanceDoucement(){
+    _motG.avance( _vitesseDoucement );
+    _motD.avance( _vitesseDoucement );    
+}

@@ -31,7 +31,9 @@ class CRobotJunior{
         void init( unsigned long tempsCycle );
         void update();
         
-        enum { FOLLOWLIGNE, LIGNELOST, PAUSE, END, RETRIVELIGN, RECULE, REALIGN };
+        enum { FOLLOWLIGNE, LIGNELOST, PAUSE, END, RETRIVELIGN, RECULE, REALIGN
+                , REAL_ST21, REAL_ATTTIMER, REAL_ST22
+                , REAL_ATTALIG, REAL_ST0, REAL_ST1};
         
     private:
 
@@ -62,7 +64,10 @@ class CRobotJunior{
         void _allumeDroiteGauche();
         void _eteindLed();
         void _tourneGauche( int force );
+        void _tourneGauche();
         void _tourneDroite( int force );
+        void _tourneDroite();
+        void _avanceDoucement();
         
         void _stop();
         void _followTheLigne();

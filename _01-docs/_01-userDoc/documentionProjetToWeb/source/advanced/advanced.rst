@@ -2,6 +2,26 @@
 Advanced stuf for robot Junior
 ++++++++++++++++++++++++++++++++
 
+
+
+================================
+Bilan hardware
+================================
+
+La liste des broches utilisées dans la version de base se trouve dans `les fiches pédagogiques`_
+sous Github
+
+La dessus, on ajoute 6 broches pour le capteur du `Suiveur de ligne`_ (6,8,10,14,16,18)
+
+Le module NRF24 pour la télémétrie utilise les broche SPI cf `Télémètrie / RF transmissions`_ ainsi
+que 48 et 49
+
+La mesure de la tension batterie sur A0
+
+
+.. _`les fiches pédagogiques` : https://github.com/volab/permisC2019/blob/master/_01-docs/_01-userDoc/fiches_peda_pcb_sansvariable/doc_peda_pcb_sansvariable_pdf/robot_junior_Annexe.pdf
+
+
 ======================================
 Suiveur de ligne
 ======================================
@@ -203,13 +223,7 @@ Les `modules NRF24RL01`_ utilsés proviennent de chez Amazon.
    
    NRF24L01 modules
 
-.. figure:: images/NRF24pinout.png
-   :width: 300 px
-   :figwidth: 100%
-   :alt: NRF24L01 modules
-   :align: left
-   
-   NRD24L01 pinout
+
 
 
 Réussite. Transfert de 4 puis 8 octets à 2Mbps.
@@ -412,6 +426,52 @@ du lab.
 .. _`modules NRF24RL01` :  https://www.amazon.fr/Pixnor-NRF24L01-%C3%A9metteurr%C3%A9cepteur-Arduino-Compatible/dp/B016BAM80C/ref=sr_1_4?ie=UTF8&qid=1451854927&sr=8-4&keywords=nrf24l01
 
 
+Mise en place du module NRF24 sur le robot
+================================================
+
+Sur la maquette ainsi que sur la version PCB, nous n'avons que peu de lattitude pour ajouter des 
+modules. Chance, la 2560pro fourni un petit connecteur de 6 IO que nous n'avons pas utilisé.
+
+.. figure:: images/broches2560Dispo.jpg
+   :width: 300 px
+   :figwidth: 100%
+   :alt: Connecteur 2560pro 6 io
+   :align: center
+   
+   Connecteur 2560pro 6 io
+   
+En réalité, ces 6 broches ne sont pas vraiment disponibles si on veut utiliser le bus SPI.
+En effet, sur l'ATMega2560 le bus SPI est sur ces broches... seules 48 et 49 sont vraiment
+disponibles.
+
+.. figure:: images/48_53MosiMiso.jpg
+   :width: 300 px
+   :figwidth: 100%
+   :alt: Connecteur 2560pro partage SPI
+   :align: center
+   
+   Connecteur 2560pro 6 Connecteur 2560pro partage SPI
+   
+Réalisation d'un adaptateur :
+
+.. figure:: images/cablageAdaptNRF24.jpg
+   :width: 300 px
+   :figwidth: 100%
+   :alt: adatateur NRF24 cablage
+   :align: center
+   
+   Adatateur NRF24 plan de cablage
+
+.. figure:: images/NRF24pinout.png
+   :width: 300 px
+   :figwidth: 100%
+   :alt: NRF24L01 modules
+   :align: center
+   
+   NRD24L01 pinout
+
+texte
+
 Autres solutions à explorer
 ======================================
 XBEE : product line sur protocole ZigBee
@@ -507,7 +567,7 @@ Chargeur de batteries
 ou 
 
 
-.. _`link_desc` :  http://wiki.seeedstudio.com/Grove-LED_Bar/
+.. _`LED bar : Seedstudio` :  http://wiki.seeedstudio.com/Grove-LED_Bar/
 
 =========
 Weblinks

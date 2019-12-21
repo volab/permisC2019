@@ -48,6 +48,8 @@
 #define MOTEUR_DROITE_VITS_PIN 12
 
 #define BUZZER_PIN 4
+
+#define MES_U_BATT A0
     
 
 #ifdef MAQUETTE_VERSION

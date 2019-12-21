@@ -21,7 +21,14 @@ Infos générales sur le projet Permis C 2019
 Documentation du projet
 =============================
 
-.. contents:: Table of Contents
+.. contents:: Table des matières
+    :backlinks: top
+
+:Auteur: J.Soranzo
+:Date: mounth 2019
+:Societe: VoLAB
+:Entity: VoRoBoTics
+
 
 Présentation
 =================
